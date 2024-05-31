@@ -1,70 +1,86 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Button } from "react-native";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { HelloWave } from "@/components/HelloWave";
+import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+
+const news = [
+  {
+    title: "Open Positions in SF General Service",
+    description:
+      "We have openings for a Literature Rep, BTG Co-Chair, Liaison to SF Public Relations and several DCMs.  Please consider making yourself available.",
+    buttons: ["I'm available!"],
+  },
+  {
+    title: "Save the Date for SF Unity Day",
+    description:
+      "Saturday, October 5, 2024 at First Unitarian Universalist Church on 1187 Franklin Street at Gough!  This year will be more of a forum/assembly format in order to promote increased dialogue between SF General Service, Intergroup and H&I.",
+    buttons: ["Add to calendar", "I want to help!"],
+  },
+  {
+    title: "Area Delegate's Report",
+    description:
+      "Please pass along to your groups.  The Area Delegate's powerpoint presentation is now available for download.",
+    buttons: ["View the presentation"],
+  },
+];
 
 export default function HomeScreen() {
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
       headerImage={
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+          source={require("@/assets/images/golden-gate-bridge.jpg")}
+          style={styles.goldenGateBridge}
         />
-      }>
+      }
+    >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+        <ThemedText type="title">News</ThemedText>
         <HelloWave />
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
+      <ThemedView style={styles.filterContainer}>
+        <Button title="Announcements" color="gray" />
+        <Button title="Events" color="gray" />
+        <Button title="District 06" color="gray" />
+        <Button title="Area 06" color="gray" />
+        <Button title="GSO" color="gray" />
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
+      {news.map((story, index) => (
+        <ThemedView style={styles.newsStory} key={index}>
+          <ThemedText type="subtitle">{story.title}</ThemedText>
+          <ThemedText>{story.description}</ThemedText>
+          {story.buttons.map((button, index) => (
+            <Button key={index} title={button} />
+          ))}
+        </ThemedView>
+      ))}
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
   },
-  stepContainer: {
+  filterContainer: {
+    gap: 8,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginBottom: 8,
+  },
+  newsStory: {
     gap: 8,
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  goldenGateBridge: {
+    height: 280,
+    width: 1200,
+    left: "50%",
+    marginLeft: -600,
   },
 });
