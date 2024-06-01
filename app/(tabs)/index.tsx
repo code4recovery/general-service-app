@@ -2,6 +2,7 @@ import { Image, StyleSheet, Button } from "react-native";
 
 import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { ThemedButton } from "@/components/ThemedButton";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 
@@ -42,19 +43,21 @@ export default function HomeScreen() {
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.filterContainer}>
-        <Button title="Announcements" color="gray" />
-        <Button title="Events" color="gray" />
-        <Button title="District 06" color="gray" />
-        <Button title="Area 06" color="gray" />
-        <Button title="GSO" color="gray" />
+        <ThemedButton title="District 06" />
+        <ThemedButton title="Area 06" />
+        <ThemedButton title="GSO" />
+        <ThemedButton title="Announcements" />
+        <ThemedButton title="Events" />
       </ThemedView>
       {news.map((story, index) => (
         <ThemedView style={styles.newsStory} key={index}>
           <ThemedText type="subtitle">{story.title}</ThemedText>
           <ThemedText>{story.description}</ThemedText>
-          {story.buttons.map((button, index) => (
-            <Button key={index} title={button} />
-          ))}
+          <ThemedView style={styles.storyButtons}>
+            {story.buttons.map((button, index) => (
+              <ThemedButton key={index} primary title={button} />
+            ))}
+          </ThemedView>
         </ThemedView>
       ))}
     </ParallaxScrollView>
@@ -63,14 +66,14 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    flexDirection: "row",
     alignItems: "center",
+    flexDirection: "row",
     gap: 8,
   },
   filterContainer: {
-    gap: 8,
     flexDirection: "row",
     flexWrap: "wrap",
+    gap: 8,
     marginBottom: 8,
   },
   newsStory: {
@@ -79,8 +82,16 @@ const styles = StyleSheet.create({
   },
   goldenGateBridge: {
     height: 280,
-    width: 1200,
     left: "50%",
     marginLeft: -600,
+    width: 1200,
+  },
+  storyButtons: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+    marginBottom: 10,
+    marginTop: 10,
   },
 });
