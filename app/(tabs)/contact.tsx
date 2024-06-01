@@ -1,102 +1,202 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet, Image, Platform } from 'react-native';
+import { StyleSheet } from "react-native";
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Collapsible } from "@/components/Collapsible";
+import { ExternalLink } from "@/components/ExternalLink";
+import { HeaderImage } from "@/components/HeaderImage";
+import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
 
-export default function TabTwoScreen() {
+const districtContacts = [
+  {
+    title: "DCMC (Chair)",
+    email: "chair@sfgeneralservice.org",
+  },
+  {
+    title: "Alt. Chair",
+    email: "alt.chair@sfgeneralservice.org",
+  },
+  {
+    title: "Mail Coordinator",
+    email: "mail@sfgeneralservice.org",
+  },
+  {
+    title: "Recording Secretary",
+    email: "mail@sfgeneralservice.org",
+  },
+  {
+    title: "Registrar",
+    email: "registrar@sfgeneralservice.org",
+  },
+  {
+    title: "Treasurer",
+    email: "treasurer@sfgeneralservice.org",
+  },
+  {
+    title: "Events",
+    email: "events@sfgeneralservice.org",
+  },
+  {
+    title: "Literature",
+    email: "literature@sfgeneralservice.org",
+  },
+  {
+    title: "Grapevine Representative",
+    email: "gvr@sfgeneralservice.org",
+  },
+  {
+    title: "General Inquiries",
+    email: "info@sfgeneralservice.org",
+  },
+];
+
+const areaContacts = [
+  {
+    title: "Pacific Region Trustee",
+    email: "trustee@cnca06.org",
+  },
+  {
+    title: "Accessibilities Chair",
+    email: "accessibilities@cnca06.org",
+  },
+  {
+    title: "Alt Delegate",
+    email: "alt-delegate@cnca06.org",
+  },
+  {
+    title: "Archives Chair",
+    email: "archives@cnca06.org",
+  },
+  {
+    title: "Assembly Coordinator",
+    email: "assemblies@cnca06.org",
+  },
+  {
+    title: "Bridging The Gap Chair",
+    email: "btg@cnca06.org",
+  },
+  {
+    title: "CNCA Area Chair",
+    email: "chair@cnca06.org",
+  },
+  {
+    title: "CNCA Comments Advisor",
+    email: "comments-advisor@cnca06.org",
+  },
+  {
+    title: "CNCA Comments",
+    email: "comments@cnca06.org",
+  },
+  {
+    title: "CNCA Commentarios Advisor",
+    email: "commentarios-advisor@cnca06.org",
+  },
+  {
+    title: "CNCA Comentarios",
+    email: "commentarios@cnca06.org",
+  },
+  {
+    title: "Delegate",
+    email: "delegate@cnca06.org",
+  },
+  {
+    title: "Finance Chair",
+    email: "finance@cnca06.org",
+  },
+  {
+    title: "Grapevine Chair",
+    email: "grapevine@cnca06.org",
+  },
+  {
+    title: "La Vina Chair",
+    email: "la-vina@cnca06.org",
+  },
+  {
+    title: "Literature",
+    email: "literature@cnca06.org",
+  },
+  {
+    title: "PI/CPC",
+    email: "picpc@cnca06.org",
+  },
+  {
+    title: "Recording Secretary",
+    email: "recording@cnca06.org",
+  },
+  {
+    title: "Registrar",
+    email: "registrar@cnca06.org",
+  },
+  {
+    title: "Technology Chair",
+    email: "tech@cnca06.org",
+  },
+  {
+    title: "Translation Chair",
+    email: "translation@cnca06.org",
+  },
+  {
+    title: "Treasurer",
+    email: "treasurer@cnca06.org",
+  },
+  {
+    title: "Website Chair",
+    email: "website@cnca06.org",
+  },
+];
+
+const gsoContacts = [
+  {
+    title: "Group Services",
+    email: "group.services@aa.org",
+  },
+];
+
+const contacts = [
+  {
+    name: "District 06",
+    contacts: districtContacts,
+  },
+  {
+    name: "Area 06",
+    contacts: areaContacts,
+  },
+  {
+    name: "GSO",
+    contacts: gsoContacts,
+  },
+];
+
+export default function ContactScreen() {
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={<Ionicons size={310} name="code-slash" style={styles.headerImage} />}>
+      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
+      headerImage={<HeaderImage />}
+    >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
+        <ThemedText type="title">Contact</ThemedText>
       </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText> library
-          to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
+      <ThemedText>
+        Have a question? The following resources can help:
+      </ThemedText>
+      {contacts.map((entity, index) => (
+        <Collapsible title={entity.name} key={index}>
+          {entity.contacts.map((contact, index) => (
+            <ThemedView key={index}>
+              <ExternalLink href={`mailto:${contact.email}`}>
+                <ThemedText type="link">{contact.title}</ThemedText>
+              </ExternalLink>
+            </ThemedView>
+          ))}
+        </Collapsible>
+      ))}
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
-  },
   titleContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 8,
   },
 });

@@ -1,5 +1,6 @@
-import { Image, StyleSheet, Button } from "react-native";
+import { StyleSheet } from "react-native";
 
+import { HeaderImage } from "@/components/HeaderImage";
 import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedButton } from "@/components/ThemedButton";
@@ -31,12 +32,7 @@ export default function HomeScreen() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerImage={
-        <Image
-          source={require("@/assets/images/golden-gate-bridge.jpg")}
-          style={styles.goldenGateBridge}
-        />
-      }
+      headerImage={<HeaderImage />}
     >
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">News</ThemedText>
@@ -79,12 +75,6 @@ const styles = StyleSheet.create({
   newsStory: {
     gap: 8,
     marginBottom: 8,
-  },
-  goldenGateBridge: {
-    height: 280,
-    left: "50%",
-    marginLeft: -600,
-    width: 1200,
   },
   storyButtons: {
     display: "flex",
