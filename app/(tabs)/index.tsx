@@ -7,28 +7,10 @@ import { ThemedButton } from "@/components/ThemedButton";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 
-const news = [
-  {
-    title: "Open Positions in SF General Service",
-    description:
-      "We have openings for a Literature Rep, BTG Co-Chair, Liaison to SF Public Relations and several DCMs.  Please consider making yourself available.",
-    buttons: ["I'm available!"],
-  },
-  {
-    title: "Save the Date for SF Unity Day",
-    description:
-      "Saturday, October 5, 2024 at First Unitarian Universalist Church on 1187 Franklin Street at Gough!  This year will be more of a forum/assembly format in order to promote increased dialogue between SF General Service, Intergroup and H&I.",
-    buttons: ["Add to calendar", "I want to help!"],
-  },
-  {
-    title: "Area Delegate's Report",
-    description:
-      "Please pass along to your groups.  The Area Delegate's powerpoint presentation is now available for download.",
-    buttons: ["View the presentation"],
-  },
-];
+import { useContent } from "@/hooks/useContent";
 
 export default function HomeScreen() {
+  const { stories } = useContent();
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -45,13 +27,13 @@ export default function HomeScreen() {
         <ThemedButton title="Announcements" />
         <ThemedButton title="Events" />
       </ThemedView>
-      {news.map((story, index) => (
+      {stories.map((story, index) => (
         <ThemedView style={styles.newsStory} key={index}>
           <ThemedText type="subtitle">{story.title}</ThemedText>
           <ThemedText>{story.description}</ThemedText>
           <ThemedView style={styles.storyButtons}>
             {story.buttons.map((button, index) => (
-              <ThemedButton key={index} primary title={button} />
+              <ThemedButton key={index} primary title={button.title} />
             ))}
           </ThemedView>
         </ThemedView>
