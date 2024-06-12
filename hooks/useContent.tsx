@@ -15,6 +15,7 @@ type ContentContextType = {
     expire_at: string;
     type: string;
     buttons: {
+      id: string;
       title: string;
       link: string;
       style: string;

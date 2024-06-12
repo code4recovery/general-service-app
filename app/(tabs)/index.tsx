@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Linking, StyleSheet } from "react-native";
 
 import { HeaderImage } from "@/components/HeaderImage";
 import { HelloWave } from "@/components/HelloWave";
@@ -32,8 +32,13 @@ export default function HomeScreen() {
           <ThemedText type="subtitle">{story.title}</ThemedText>
           <ThemedText>{story.description}</ThemedText>
           <ThemedView style={styles.storyButtons}>
-            {story.buttons.map((button, index) => (
-              <ThemedButton key={index} primary title={button.title} />
+            {story.buttons.map(({ id, title, link }) => (
+              <ThemedButton
+                key={id}
+                onPress={() => Linking.openURL(link)}
+                primary
+                title={title}
+              />
             ))}
           </ThemedView>
         </ThemedView>
@@ -52,18 +57,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 8,
-    marginBottom: 8,
   },
   newsStory: {
     gap: 8,
-    marginBottom: 8,
+    marginTop: 16,
   },
   storyButtons: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 8,
-    marginBottom: 10,
-    marginTop: 10,
   },
 });
