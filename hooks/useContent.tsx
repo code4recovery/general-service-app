@@ -6,43 +6,23 @@ import {
   useContext,
 } from "react";
 
-type ContentContextType = {
-  requestInProgress: boolean;
-  stories: {
-    title: string;
-    description: string;
-    effective_at: string;
-    expire_at: string;
-    type: string;
-    buttons: {
-      id: string;
-      title: string;
-      link: string;
-      style: string;
-    }[];
-  }[];
-};
+import { type Entity } from "@/helpers/types";
 
-const ContentContext = createContext<ContentContextType>({
-  requestInProgress: true,
-  stories: [],
+const ContentContext = createContext<{ entities?: Entity[] }>({
+  entities: undefined,
 });
 
 export const ContentProvider = ({ children }: PropsWithChildren) => {
-  const [requestInProgress, setRequestInProgress] = useState(true);
-  const [stories, setStories] = useState<ContentContextType["stories"]>([]);
+  const [entities, setEntities] = useState<Entity[]>();
 
   useEffect(() => {
-    fetch("https://generalservice.app/storage/area-06-district-06.json")
+    fetch("https://generalservice.app/storage/6-6.json")
       .then((response) => response.json())
-      .then((data) => {
-        setStories(data.stories);
-        setRequestInProgress(false);
-      });
+      .then((entities) => setEntities(entities));
   }, []);
 
   return (
-    <ContentContext.Provider value={{ requestInProgress, stories }}>
+    <ContentContext.Provider value={{ entities }}>
       {children}
     </ContentContext.Provider>
   );

@@ -6,10 +6,12 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 export function ThemedButton({
   onPress,
   primary = false,
+  highlighted = false,
   title,
 }: {
   onPress?: () => void;
   primary?: boolean;
+  highlighted?: boolean;
   title: string;
 }) {
   const backgroundColor = useThemeColor({}, primary ? "primary" : "secondary");
@@ -18,7 +20,7 @@ export function ThemedButton({
   const styles = StyleSheet.create({
     button: {
       alignItems: "center",
-      backgroundColor,
+      backgroundColor: highlighted ? color : backgroundColor,
       borderRadius: 3,
       elevation: 3,
       justifyContent: "center",
@@ -26,7 +28,7 @@ export function ThemedButton({
       paddingVertical: primary ? 12 : 10,
     },
     text: {
-      color,
+      color: highlighted ? backgroundColor : color,
       fontSize: primary ? 16 : 14,
       fontWeight: 600,
       lineHeight: primary ? 20 : 16,
