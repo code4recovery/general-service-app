@@ -39,6 +39,7 @@ export default function HomeScreen() {
       <ThemedView style={styles.filterContainer}>
         {Object.keys(entityFilters).map((filter) => (
           <ThemedButton
+            key={filter}
             title={entityFilters[filter as keyof typeof entityFilters]}
             onPress={() =>
               setEntityFilter((f) => (f === filter ? undefined : filter))
@@ -48,6 +49,7 @@ export default function HomeScreen() {
         ))}
         {Object.keys(typeFilters).map((filter) => (
           <ThemedButton
+            key={filter}
             title={typeFilters[filter as keyof typeof typeFilters]}
             onPress={() =>
               setTypeFilter((f) => (f === filter ? undefined : filter))
