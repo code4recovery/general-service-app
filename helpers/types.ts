@@ -24,4 +24,10 @@ export type Entity = {
       link: string;
     }[];
   }[];
+  links: {
+    id: number;
+    entity_id: number;
+    title: string;
+    target: string;
+  }[];
 };

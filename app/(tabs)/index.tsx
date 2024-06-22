@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Linking, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { HeaderImage } from "@/components/HeaderImage";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
@@ -11,12 +11,11 @@ import { useContent } from "@/hooks/useContent";
 import { useColors } from "@/hooks/useColors";
 
 import { entityName } from "@/helpers/entity-name";
-import { useColorScheme } from "@/hooks/useColorScheme";
+import { openLink } from "@/helpers/open-link";
 
 export default function HomeScreen() {
   const { entities } = useContent();
   const colors = useColors();
-  const colorScheme = useColorScheme();
   const [entityFilter, setEntityFilter] = useState<string | undefined>();
   const [typeFilter, setTypeFilter] = useState<string | undefined>();
 
@@ -33,17 +32,7 @@ export default function HomeScreen() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerImage={
-        entities?.length ? (
-          <HeaderImage
-            uri={
-              colorScheme === "dark"
-                ? entities[0].banner_dark
-                : entities[0].banner
-            }
-          />
-        ) : undefined
-      }
+      headerImage={<HeaderImage />}
     >
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">News</ThemedText>
@@ -102,7 +91,7 @@ export default function HomeScreen() {
                     {story.buttons.map(({ id, title, link }) => (
                       <ThemedButton
                         key={id}
-                        onPress={() => Linking.openURL(link)}
+                        onPress={() => openLink(link)}
                         primary
                         title={title}
                       />
