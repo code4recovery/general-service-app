@@ -4,6 +4,7 @@ export type Entity = {
   district: number | null;
   name: string;
   banner: string;
+  banner_dark: string;
   website: string;
   language: string;
   stories: {

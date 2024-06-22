@@ -11,10 +11,12 @@ import { useContent } from "@/hooks/useContent";
 import { useColors } from "@/hooks/useColors";
 
 import { entityName } from "@/helpers/entity-name";
+import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function HomeScreen() {
   const { entities } = useContent();
   const colors = useColors();
+  const colorScheme = useColorScheme();
   const [entityFilter, setEntityFilter] = useState<string | undefined>();
   const [typeFilter, setTypeFilter] = useState<string | undefined>();
 
@@ -31,7 +33,17 @@ export default function HomeScreen() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerImage={<HeaderImage />}
+      headerImage={
+        entities?.length ? (
+          <HeaderImage
+            uri={
+              colorScheme === "dark"
+                ? entities[0].banner_dark
+                : entities[0].banner
+            }
+          />
+        ) : undefined
+      }
     >
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">News</ThemedText>

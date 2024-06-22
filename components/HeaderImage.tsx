@@ -1,19 +1,17 @@
-import { Image, StyleSheet } from "react-native";
+import { ImageBackground, StyleSheet } from "react-native";
 
-export function HeaderImage() {
+export function HeaderImage({ uri }: { uri: string }) {
   return (
-    <Image
-      source={require("@/assets/images/golden-gate-bridge.jpg")}
-      style={styles.goldenGateBridge}
+    <ImageBackground
+      resizeMode="cover"
+      source={{ uri }}
+      style={styles.banner}
     />
   );
 }
 
 const styles = StyleSheet.create({
-  goldenGateBridge: {
+  banner: {
     height: 280,
-    left: "50%",
-    marginLeft: -600,
-    width: 1200,
   },
 });
