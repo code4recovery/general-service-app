@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Image, Pressable, StyleSheet } from "react-native";
 
 import { Collapsible } from "@/components/Collapsible";
 import { ExternalLink } from "@/components/ExternalLink";
@@ -8,6 +8,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useContent } from "@/hooks/useContent";
 import { entityName } from "@/helpers/entity-name";
+import { openLink } from "@/helpers/open-link";
 
 export default function AboutScreen() {
   const { entities } = useContent();
@@ -19,13 +20,62 @@ export default function AboutScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">About</ThemedText>
       </ThemedView>
+
+      <Collapsible title="Looking for A.A. meetings?">
+        <Pressable
+          onPress={() => openLink("https://meetingguide.org/download")}
+        >
+          <ThemedView
+            style={{
+              flexDirection: "row",
+              gap: 14,
+              marginTop: 7,
+            }}
+          >
+            <Image
+              source={require("../../assets/images/meeting-guide.png")}
+              style={{ width: 80, height: 80 }}
+            />
+            <ThemedView
+              style={{
+                alignItems: "flex-start",
+                gap: 5,
+                marginRight: 80,
+              }}
+            >
+              <ThemedText>Download the Meeting Guide app.</ThemedText>
+              <ThemedView
+                style={{
+                  backgroundColor: "#007AFF",
+                  borderRadius: 16,
+                  paddingHorizontal: 10,
+                  paddingVertical: 2,
+                }}
+              >
+                <ThemedText
+                  style={{
+                    color: "white",
+                    fontSize: 12,
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Download
+                </ThemedText>
+              </ThemedView>
+            </ThemedView>
+          </ThemedView>
+        </Pressable>
+      </Collapsible>
+
       <ThemedText>
         This app is a resource for A.A. Group General Service Representatives
         (GSRs) to know what's going on in their District, Area, and at the
         General Service Office (GSO).
       </ThemedText>
       <ThemedText>
-        District Chairs are welcome to use this service in their District at{" "}
+        District Chairs are welcome to use this service in their District. They
+        can sign up at{" "}
         <ExternalLink href="https://generalservice.app">
           <ThemedText type="link">generalservice.app</ThemedText>
         </ExternalLink>

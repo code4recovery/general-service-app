@@ -16,18 +16,8 @@ import { openLink } from "@/helpers/open-link";
 export default function HomeScreen() {
   const { entities } = useContent();
   const colors = useColors();
-  const [entityFilter, setEntityFilter] = useState<string | undefined>();
-  const [typeFilter, setTypeFilter] = useState<string | undefined>();
-
-  const entityFilters = {
-    district: "District 06",
-    area: "Area 06",
-    gso: "GSO",
-  };
-  const typeFilters = {
-    announcement: "Announcements",
-    event: "Events",
-  };
+  const [entityFilter, setEntityFilter] = useState<EntityType | undefined>();
+  const [typeFilter, setTypeFilter] = useState<StoryType | undefined>();
 
   return (
     <ParallaxScrollView
@@ -38,20 +28,20 @@ export default function HomeScreen() {
         <ThemedText type="title">News</ThemedText>
       </ThemedView>
       <ThemedView style={styles.filterContainer}>
-        {Object.keys(entityFilters).map((filter) => (
+        {entityButtons.map((filter) => (
           <ThemedButton
             key={filter}
-            title={entityFilters[filter as keyof typeof entityFilters]}
+            title={entityFilters[filter]}
             onPress={() =>
               setEntityFilter((f) => (f === filter ? undefined : filter))
             }
             highlighted={entityFilter === filter}
           />
         ))}
-        {Object.keys(typeFilters).map((filter) => (
+        {storyButtons.map((filter) => (
           <ThemedButton
             key={filter}
-            title={typeFilters[filter as keyof typeof typeFilters]}
+            title={storyFilters[filter]}
             onPress={() =>
               setTypeFilter((f) => (f === filter ? undefined : filter))
             }
@@ -104,6 +94,23 @@ export default function HomeScreen() {
     </ParallaxScrollView>
   );
 }
+
+const entityFilters = {
+  district: "District 06",
+  area: "Area 06",
+  gso: "GSO",
+} as const;
+
+const storyFilters = {
+  announcement: "Announcements",
+  event: "Events",
+} as const;
+
+type EntityType = keyof typeof entityFilters;
+type StoryType = keyof typeof storyFilters;
+
+const entityButtons = Object.keys(entityFilters) as EntityType[];
+const storyButtons = Object.keys(storyFilters) as StoryType[];
 
 const styles = StyleSheet.create({
   entityName: {

@@ -20,7 +20,7 @@ export default function ContactScreen() {
         <ThemedText type="title">Contact</ThemedText>
       </ThemedView>
       <ThemedText>
-        Have a question? The following resources can help:
+        Have a question? These people may be able to help:
       </ThemedText>
       {entities?.map((entity, index) => (
         <Collapsible title={entityName(entity)} key={index}>
