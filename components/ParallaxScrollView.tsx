@@ -13,6 +13,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { ThemedView } from "@/components/ThemedView";
+import { ChangeDistrict } from "@/components/ChangeDistrict";
 import { useContent } from "@/hooks/useContent";
 
 const HEADER_HEIGHT = 250;
@@ -73,6 +74,7 @@ export default function ParallaxScrollView({
           ]}
         >
           {headerImage}
+          <ChangeDistrict />
         </Animated.View>
         {loading ? (
           <ActivityIndicator size="large" style={styles.spinner} />
