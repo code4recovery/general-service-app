@@ -1,5 +1,10 @@
 import type { PropsWithChildren, ReactElement } from "react";
-import { StyleSheet, useColorScheme } from "react-native";
+import {
+  ActivityIndicator,
+  RefreshControl,
+  StyleSheet,
+  useColorScheme,
+} from "react-native";
 import Animated, {
   interpolate,
   useAnimatedRef,
@@ -8,6 +13,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { ThemedView } from "@/components/ThemedView";
+import { useContent } from "@/hooks/useContent";
 
 const HEADER_HEIGHT = 250;
 
@@ -24,6 +30,7 @@ export default function ParallaxScrollView({
   const colorScheme = useColorScheme() ?? "light";
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
+  const { loading, setLoading } = useContent();
 
   const headerAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -48,7 +55,16 @@ export default function ParallaxScrollView({
 
   return (
     <ThemedView style={styles.container}>
-      <Animated.ScrollView ref={scrollRef} scrollEventThrottle={16}>
+      <Animated.ScrollView
+        ref={scrollRef}
+        scrollEventThrottle={16}
+        refreshControl={
+          <RefreshControl
+            refreshing={loading}
+            onRefresh={() => setLoading(true)}
+          />
+        }
+      >
         <Animated.View
           style={[
             styles.header,
@@ -58,7 +74,11 @@ export default function ParallaxScrollView({
         >
           {headerImage}
         </Animated.View>
-        <ThemedView style={styles.content}>{children}</ThemedView>
+        {loading ? (
+          <ActivityIndicator size="large" style={styles.spinner} />
+        ) : (
+          <ThemedView style={styles.content}>{children}</ThemedView>
+        )}
       </Animated.ScrollView>
     </ThemedView>
   );
@@ -77,5 +97,9 @@ const styles = StyleSheet.create({
     padding: 24,
     gap: 16,
     overflow: "hidden",
+  },
+  spinner: {
+    marginVertical: 100,
+    marginHorizontal: "auto",
   },
 });
