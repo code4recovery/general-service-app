@@ -7,6 +7,7 @@ import {
 } from "react";
 
 import { type Entity } from "@/helpers/types";
+import { useLocation } from "@/hooks/useLocation";
 
 const ContentContext = createContext<{
   entities?: Entity[];
@@ -21,14 +22,16 @@ const ContentContext = createContext<{
 export const ContentProvider = ({ children }: PropsWithChildren) => {
   const [entities, setEntities] = useState<Entity[]>();
   const [loading, setLoading] = useState(true);
+  const { area, district } = useLocation();
 
   useEffect(() => {
     if (!loading) return;
-    fetch("https://generalservice.app/storage/6-6.json")
+    const url = `https://generalservice.app/storage/${area}-${district}.json?${new Date().getTime()}`;
+    fetch(url)
       .then((response) => response.json())
       .then((entities) => setEntities(entities))
       .finally(() => setLoading(false));
-  }, [loading]);
+  }, [loading, area, district]);
 
   return (
     <ContentContext.Provider value={{ entities, loading, setLoading }}>

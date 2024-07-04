@@ -76,11 +76,13 @@ export default function ParallaxScrollView({
           {headerImage}
           <ChangeDistrict />
         </Animated.View>
-        {loading ? (
-          <ActivityIndicator size="large" style={styles.spinner} />
-        ) : (
-          <ThemedView style={styles.content}>{children}</ThemedView>
-        )}
+        <ThemedView style={styles.content}>
+          {loading ? (
+            <ActivityIndicator size="large" style={styles.spinner} />
+          ) : (
+            children
+          )}
+        </ThemedView>
       </Animated.ScrollView>
     </ThemedView>
   );

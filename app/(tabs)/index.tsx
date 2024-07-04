@@ -37,7 +37,9 @@ export default function HomeScreen() {
           {entity.stories.map((story) => (
             <ThemedView style={styles.newsStory} key={story.id}>
               <ThemedText type="subtitle">{story.title}</ThemedText>
-              <ThemedText>{story.description}</ThemedText>
+              {story.description.split("\r\n").map((text, index) => (
+                <ThemedText key={index}>{text}</ThemedText>
+              ))}
               <ThemedView style={styles.storyButtons}>
                 {story.buttons.map(({ id, title, link }) => (
                   <ThemedButton
