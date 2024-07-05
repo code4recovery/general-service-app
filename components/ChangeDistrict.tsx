@@ -10,6 +10,7 @@ import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "./ThemedText";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
+import { i18n } from "@/helpers/i18n";
 
 export function ChangeDistrict() {
   const colorScheme = useColorScheme() ?? "light";
@@ -38,7 +39,9 @@ export function ChangeDistrict() {
       >
         <ThemedView style={styles.modal}>
           <ThemedView style={{ ...styles.header, backgroundColor }}>
-            <ThemedText style={styles.headerText}>Change District</ThemedText>
+            <ThemedText style={styles.headerText}>
+              {i18n.t("changeDistrict")}
+            </ThemedText>
             <Pressable
               onPress={() => setModalVisible(!modalVisible)}
               style={styles.buttonClose}

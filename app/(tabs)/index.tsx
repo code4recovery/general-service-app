@@ -11,6 +11,7 @@ import { useColors } from "@/hooks/useColors";
 
 import { entityName } from "@/helpers/entity-name";
 import { openLink } from "@/helpers/open-link";
+import { i18n } from "@/helpers/i18n";
 
 export default function HomeScreen() {
   const { entities } = useContent();
@@ -22,7 +23,7 @@ export default function HomeScreen() {
       headerImage={<HeaderImage />}
     >
       <ThemedView>
-        <ThemedText type="title">News</ThemedText>
+        <ThemedText type="title">{i18n.t("news")}</ThemedText>
       </ThemedView>
       {entities?.map((entity) => (
         <ThemedView key={entity.id}>

@@ -3,6 +3,7 @@ import React from "react";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { useColors } from "@/hooks/useColors";
+import { i18n } from "@/helpers/i18n";
 
 export default function TabLayout() {
   const colors = useColors();
@@ -17,6 +18,9 @@ export default function TabLayout() {
           borderTopWidth: 1,
           paddingTop: 4,
         },
+        tabBarLabelStyle: {
+          fontSize: 12,
+        },
         tabBarActiveTintColor: colors.tint,
         headerShown: false,
       }}
@@ -24,7 +28,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "News",
+          title: i18n.t("news"),
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "newspaper" : "newspaper-outline"}
@@ -36,7 +40,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="about"
         options={{
-          title: "About",
+          title: i18n.t("about"),
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={
@@ -50,7 +54,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="contact"
         options={{
-          title: "Contact",
+          title: i18n.t("contact"),
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "chatbubble" : "chatbubble-outline"}
