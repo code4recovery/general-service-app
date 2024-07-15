@@ -13,6 +13,7 @@ export const es = {
   contactDescription: "¿Tienes una pregunta? Estas personas pueden ayudarte:",
   district: "Distrito {{number}}: {{name}}",
   download: "Descargar",
+  find_district: "Encuentra tu distrito",
   gso: "Oficina de Servicio General",
   news: "Noticias",
   share: "Compartir",

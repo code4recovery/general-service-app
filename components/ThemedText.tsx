@@ -22,11 +22,8 @@ export function ThemedText({
   type = "default",
   ...rest
 }: ThemedTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
-  const linkColor = useThemeColor(
-    { light: "#007AFF", dark: "#0984FF" },
-    "primary"
-  );
+  const color = useThemeColor("text");
+  const linkColor = useThemeColor("link");
 
   return (
     <Text

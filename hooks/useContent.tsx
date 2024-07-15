@@ -7,7 +7,8 @@ import {
 } from "react";
 
 import { type Entity } from "@/helpers/types";
-import { useLocation } from "@/hooks/useLocation";
+import { useDistrict } from "@/hooks/useDistrict";
+import { DistrictPicker } from "@/components/DistrictPicker";
 
 const ContentContext = createContext<{
   entities?: Entity[];
@@ -22,20 +23,21 @@ const ContentContext = createContext<{
 export const ContentProvider = ({ children }: PropsWithChildren) => {
   const [entities, setEntities] = useState<Entity[]>();
   const [loading, setLoading] = useState(true);
-  const { area, district } = useLocation();
+  const { district } = useDistrict();
 
   useEffect(() => {
-    if (!loading) return;
-    const url = `https://generalservice.app/storage/${area}-${district}.json?${new Date().getTime()}`;
+    if (!loading || !district) return;
+    const url = `https://generalservice.app/storage/${district}.json?${new Date().getTime()}`;
     fetch(url)
       .then((response) => response.json())
       .then((entities) => setEntities(entities))
+      .catch((error) => console.error(error))
       .finally(() => setLoading(false));
-  }, [loading, area, district]);
+  }, [loading, district]);
 
   return (
     <ContentContext.Provider value={{ entities, loading, setLoading }}>
-      {children}
+      {district ? children : <DistrictPicker />}
     </ContentContext.Provider>
   );
 };

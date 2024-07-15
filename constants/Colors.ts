@@ -10,6 +10,7 @@ export const Colors = {
   light: {
     background: "#fff",
     icon: tintColorLight,
+    link: "#007AFF",
     primary: "#99ccff",
     secondary: "#ddd",
     tabBackground: "#eee",
@@ -21,6 +22,7 @@ export const Colors = {
   dark: {
     background: "#151718",
     icon: "#9BA1A6",
+    link: "#0984FF",
     primary: "#0066cc",
     secondary: "#3c3c3c",
     tabBackground: "#272727",

@@ -14,8 +14,8 @@ export function ThemedButton({
   highlighted?: boolean;
   title: string;
 }) {
-  const backgroundColor = useThemeColor({}, primary ? "primary" : "secondary");
-  const color = useThemeColor({}, "text");
+  const backgroundColor = useThemeColor(primary ? "primary" : "secondary");
+  const color = useThemeColor("text");
 
   const styles = StyleSheet.create({
     button: {

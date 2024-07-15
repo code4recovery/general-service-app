@@ -14,6 +14,7 @@ export const fr = {
     "Vous avez une question? Ces personnes peuvent peut-être vous aider:",
   district: "District {{number}}: {{name}}",
   download: "Télécharger",
+  find_district: "Trouvez votre district",
   gso: "Bureau de service général",
   news: "Nouvelles",
   share: "Partager",
