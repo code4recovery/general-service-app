@@ -1,4 +1,5 @@
 import {
+  Alert,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -8,7 +9,7 @@ import {
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "./ThemedText";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { i18n } from "@/helpers/i18n";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { useDistrict } from "@/hooks/useDistrict";
@@ -33,21 +34,16 @@ type District = {
   boundary: number[][];
 };
 
-export const DistrictPicker = ({
-  closeButton,
-}: {
-  closeButton?: JSX.Element;
-}) => {
-  const colorScheme = useColorScheme() ?? "light";
-  const { district, setDistrict } = useDistrict();
-
-  const [geolocating, setGeolocating] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  const [selectedAreas, setSelectedAreas] = useState<number[]>([]);
+export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
+  const { district: selected, setDistrict } = useDistrict();
   const [areas, setAreas] = useState<Area[]>([]);
-  const borderColor = colorScheme === "light" ? "#ccc" : "#333";
+  const [geolocating, setGeolocating] = useState(false);
+  const [selectedAreas, setSelectedAreas] = useState<number[]>([]);
+
+  const colorScheme = useColorScheme() ?? "light";
   const backgroundColor: string = colorScheme === "light" ? "#eee" : "#222";
+  const borderColor = colorScheme === "light" ? "#ccc" : "#333";
+  const highlight = colorScheme === "light" ? "#f0f0f0" : "#333";
   const iconColor = colorScheme === "light" ? "black" : "white";
   const linkColor = useThemeColor("link");
 
@@ -84,37 +80,59 @@ export const DistrictPicker = ({
           booleanPointInPolygon(user, polygon([boundary]))
         );
         if (district) {
-          console.log("setting district", district.area, district.district);
           setDistrict(district.area + "-" + district.district);
+          if (closeModal) {
+            closeModal();
+          }
         } else {
-          // todo ui
-          console.warn("District not found");
+          Alert.alert("Error", i18n.t("districtNotFound"));
         }
-        setGeolocating(false);
       })
-      .catch((error) => {
-        console.error(error);
-        setGeolocating(false);
-      });
+      .catch((error) => Alert.alert("Error", error.message))
+      .finally(() => setGeolocating(false));
   };
 
   useEffect(() => {
+    console.log("fetching areas");
     fetch(`https://generalservice.app/storage/map.json?${new Date().getTime()}`)
       .then((response) => response.json())
-      .then((areas) => setAreas(areas))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
+      .then((areas: Area[]) => {
+        setAreas(areas);
+        if (selected) {
+          const [selectedArea, selectedDistrict] = selected.split("-");
+          setSelectedAreas(
+            areas
+              .filter(
+                ({ area, districts }) =>
+                  selectedArea === area.toString() &&
+                  districts.some(
+                    ({ district }) => selectedDistrict === district.toString()
+                  )
+              )
+              .map(({ area }) => area)
+          );
+        }
+      })
+      .catch((error) => console.error(error));
   }, []);
 
   return (
-    <ThemedView style={styles.modal}>
-      <ThemedView style={{ ...styles.header, backgroundColor }}>
-        <ThemedText style={styles.headerText}>
-          {i18n.t("changeDistrict")}
-        </ThemedText>
-        {closeButton}
-      </ThemedView>
-      <ScrollView style={styles.modalBody}>
+    <ThemedView style={{ ...styles.base, ...(closeModal ? styles.modal : {}) }}>
+      {closeModal ? (
+        <ThemedView style={{ ...styles.header, backgroundColor }}>
+          <ThemedText style={styles.headerText}>
+            {i18n.t("changeDistrict")}
+          </ThemedText>
+          <Pressable onPress={closeModal} style={styles.buttonClose}>
+            <Ionicons name="close" size={24} color={iconColor} />
+          </Pressable>
+        </ThemedView>
+      ) : (
+        <ThemedView style={styles.welcome}>
+          <ThemedText>{i18n.t("welcome")}</ThemedText>
+        </ThemedView>
+      )}
+      <ScrollView style={styles.body}>
         <Pressable
           style={{ ...styles.geoButton, borderColor: linkColor }}
           onPress={geolocate}
@@ -125,30 +143,59 @@ export const DistrictPicker = ({
           </ThemedText>
         </Pressable>
         {areas.map((area) => (
-          <Pressable
-            key={area.area}
-            style={{ ...styles.area, borderColor }}
-            onPress={() =>
-              setSelectedAreas((selectedAreas) =>
-                selectedAreas.includes(area.area)
-                  ? selectedAreas.filter((a) => a !== area.area)
-                  : [...selectedAreas, area.area]
-              )
-            }
-          >
-            <Ionicons
-              name={
-                selectedAreas.includes(area.area)
-                  ? "chevron-down"
-                  : "chevron-forward"
+          <Fragment key={area.area}>
+            <Pressable
+              style={{ ...styles.area, borderColor }}
+              onPress={() =>
+                setSelectedAreas((selectedAreas) =>
+                  selectedAreas.includes(area.area)
+                    ? selectedAreas.filter((a) => a !== area.area)
+                    : [...selectedAreas, area.area]
+                )
               }
-              size={16}
-              color={iconColor}
-            />
-            <ThemedText>
-              Area {`${area.area}`.padStart(2, "0")} {area.name}
-            </ThemedText>
-          </Pressable>
+            >
+              <Ionicons
+                name={
+                  selectedAreas.includes(area.area)
+                    ? "chevron-down"
+                    : "chevron-forward"
+                }
+                size={16}
+                color={iconColor}
+              />
+              <ThemedText>
+                Area {`${area.area}`.padStart(2, "0")} {area.name}
+              </ThemedText>
+            </Pressable>
+            {selectedAreas.includes(area.area) &&
+              area.districts
+                .sort((a, b) => a.district - b.district)
+                .map((district) => (
+                  <Pressable
+                    key={district.district}
+                    style={{
+                      ...styles.area,
+                      ...styles.district,
+                      borderColor,
+                      backgroundColor:
+                        area.area + "-" + district.district === selected
+                          ? highlight
+                          : "transparent",
+                    }}
+                    onPress={() => {
+                      setDistrict(area.area + "-" + district.district);
+                      if (closeModal) {
+                        closeModal();
+                      }
+                    }}
+                  >
+                    <ThemedText>
+                      District {`${district.district}`.padStart(2, "0")}{" "}
+                      {district.name}
+                    </ThemedText>
+                  </Pressable>
+                ))}
+          </Fragment>
         ))}
       </ScrollView>
     </ThemedView>
@@ -156,63 +203,71 @@ export const DistrictPicker = ({
 };
 
 const styles = StyleSheet.create({
-  triggerModal: {
-    position: "absolute",
-    top: 58,
-    right: 10,
-    paddingHorizontal: 5,
-    paddingVertical: 2,
+  area: {
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderStyle: "solid",
     display: "flex",
-    gap: 4,
     flexDirection: "row",
+    gap: 4,
+    padding: 16,
+    width: "100%",
   },
-  modal: {
+  base: {
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "flex-start",
     marginTop: 60,
-    shadowColor: "#171717",
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
   },
-  header: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
+  body: {
     width: "100%",
-    justifyContent: "space-between",
+  },
+  buttonClose: {
+    alignItems: "center",
+    display: "flex",
+    flexShrink: 1,
+    justifyContent: "center",
+    padding: 14,
+  },
+  district: {
+    paddingLeft: 34,
+    paddingVertical: 12,
   },
   geoButton: {
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: 10,
-    margin: 12,
     alignItems: "center",
-    justifyContent: "center",
+    borderRadius: 8,
+    borderWidth: 1,
     display: "flex",
     flexDirection: "row",
     gap: 8,
+    justifyContent: "center",
+    margin: 16,
+    padding: 10,
   },
   geoButtonText: {
     fontSize: 18,
+  },
+  header: {
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
   },
   headerText: {
     fontSize: 16,
     fontWeight: "bold",
     padding: 14,
   },
-  modalBody: {
-    width: "100%",
+  modal: {
+    shadowColor: "#171717",
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
   },
-  area: {
-    display: "flex",
-    flexDirection: "row",
-    gap: 4,
-    alignItems: "center",
-    padding: 14,
-    borderStyle: "solid",
-    borderBottomWidth: 1,
+  welcome: {
+    padding: 16,
+    paddingBottom: 8,
     width: "100%",
   },
 });

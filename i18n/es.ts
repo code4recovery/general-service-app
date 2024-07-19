@@ -12,9 +12,13 @@ export const es = {
   contact: "Contacto",
   contactDescription: "¿Tienes una pregunta? Estas personas pueden ayudarte:",
   district: "Distrito {{number}}: {{name}}",
+  districtNotFound:
+    "No se pudo encontrar tu ubicación dentro de un distrito en nuestros registros.",
   download: "Descargar",
   find_district: "Encuentra tu distrito",
   gso: "Oficina de Servicio General",
   news: "Noticias",
   share: "Compartir",
+  welcome:
+    "¡Bienvenido! Para comenzar a usar este nuevo servicio, selecciona tu distrito de Servicio General de A.A. Ten en cuenta que solo parte de la Conferencia está disponible actualmente. Pronto se agregará más.",
 };

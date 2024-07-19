@@ -12,9 +12,13 @@ export const en = {
   contact: "Contact",
   contactDescription: "Have a question? These people may be able to help:",
   district: "District {{number}}: {{name}}",
+  districtNotFound:
+    "Could not find your location within a district in our records.",
   download: "Download",
   find_district: "Find your district",
   gso: "General Service Office",
   news: "News",
   share: "Share",
+  welcome:
+    "Welcome! To get started using this new service, please select your A.A. General Service district. Please note that only part of the Conference is currently available. More will be added soon.",
 };

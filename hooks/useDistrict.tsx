@@ -20,11 +20,13 @@ export const DistrictProvider = ({ children }: PropsWithChildren) => {
   const [loading, setLoading] = useState(true);
   const [district, setDistrict] = useState<string | undefined>();
 
+  // AsyncStorage.removeItem("district");
+
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem("district");
       if (value !== null) {
-        console.log("setting district", value);
+        console.log("setting district from storage", value);
         setDistrict(value);
       }
     } catch (e) {
@@ -36,7 +38,7 @@ export const DistrictProvider = ({ children }: PropsWithChildren) => {
   };
 
   const setDistrictFromPicker = (district: string) => {
-    console.log("setting district", district);
+    console.log("setting district from picker", district);
     setDistrict(district);
     AsyncStorage.setItem("district", district);
   };

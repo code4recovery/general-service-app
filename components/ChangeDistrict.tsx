@@ -1,8 +1,15 @@
-import { Modal, Pressable, StyleSheet, useColorScheme } from "react-native";
+import { useEffect, useState } from "react";
+
+import {
+  Modal,
+  Pressable,
+  StyleSheet,
+  useColorScheme,
+  View,
+} from "react-native";
 
 import { ThemedText } from "./ThemedText";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useState } from "react";
 import { DistrictPicker } from "./DistrictPicker";
 import { useContent } from "@/hooks/useContent";
 import { i18n } from "@/helpers/i18n";
@@ -11,9 +18,15 @@ export function ChangeDistrict() {
   const colorScheme = useColorScheme() ?? "light";
   const [modalVisible, setModalVisible] = useState(false);
   const iconColor = colorScheme === "light" ? "black" : "white";
-  const { entities } = useContent();
+  const { entities, loading } = useContent();
 
   const name = entities?.length ? entities[0].name : i18n.t("find_district");
+
+  useEffect(() => {
+    if (loading && modalVisible) {
+      setModalVisible(false);
+    }
+  }, [loading]);
 
   return (
     <>
@@ -22,7 +35,9 @@ export function ChangeDistrict() {
         onPress={() => setModalVisible(true)}
       >
         <Ionicons name="location-outline" size={16} color={iconColor} />
-        <ThemedText type="small">{name}</ThemedText>
+        <View style={styles.triggerModalText}>
+          <ThemedText type="small">{name}</ThemedText>
+        </View>
         <Ionicons name="chevron-down" size={16} color={iconColor} />
       </Pressable>
       <Modal
@@ -31,16 +46,7 @@ export function ChangeDistrict() {
         visible={modalVisible}
         onRequestClose={() => setModalVisible(!modalVisible)}
       >
-        <DistrictPicker
-          closeButton={
-            <Pressable
-              onPress={() => setModalVisible(!modalVisible)}
-              style={styles.buttonClose}
-            >
-              <Ionicons name="close" size={24} color={iconColor} />
-            </Pressable>
-          }
-        />
+        <DistrictPicker closeModal={() => setModalVisible(false)} />
       </Modal>
     </>
   );
@@ -48,20 +54,17 @@ export function ChangeDistrict() {
 
 const styles = StyleSheet.create({
   triggerModal: {
-    position: "absolute",
-    top: 58,
-    right: 10,
+    display: "flex",
+    flexDirection: "row",
+    gap: 4,
     paddingHorizontal: 5,
     paddingVertical: 2,
-    display: "flex",
-    gap: 4,
-    flexDirection: "row",
+    position: "absolute",
+    right: 10,
+    top: 58,
   },
-  buttonClose: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 14,
+  triggerModalText: {
     flexShrink: 1,
+    maxWidth: 250,
   },
 });
