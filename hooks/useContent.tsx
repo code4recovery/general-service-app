@@ -23,22 +23,22 @@ const ContentContext = createContext<{
 export const ContentProvider = ({ children }: PropsWithChildren) => {
   const [entities, setEntities] = useState<Entity[]>();
   const [loading, setLoading] = useState(true);
-  const { district } = useDistrict();
+  const { districtId } = useDistrict();
 
   useEffect(() => {
-    if (!district) return;
-    console.log(`fetching entities for ${district}`);
-    const url = `https://generalservice.app/storage/${district}.json?${new Date().getTime()}`;
+    if (!districtId) return;
+    console.log(`fetching entities for ${districtId}`);
+    const url = `https://generalservice.app/storage/${districtId}.json?${new Date().getTime()}`;
     fetch(url)
       .then((response) => response.json())
       .then((entities) => setEntities(entities))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
-  }, [district, loading]);
+  }, [districtId, loading]);
 
   return (
     <ContentContext.Provider value={{ entities, loading, setLoading }}>
-      {district ? children : <DistrictPicker />}
+      {districtId ? children : <DistrictPicker />}
     </ContentContext.Provider>
   );
 };

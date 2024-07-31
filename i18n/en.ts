@@ -18,6 +18,7 @@ export const en = {
   find_district: "Find your district",
   gso: "General Service Office",
   news: "News",
+  noNews: "No news to report.",
   share: "Share",
   welcome:
     "Welcome! To get started using this new service, please select your A.A. General Service district. Please note that only part of the Conference is currently available. More will be added soon.",

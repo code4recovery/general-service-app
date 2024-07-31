@@ -59,9 +59,6 @@ const styles = StyleSheet.create({
     gap: 4,
     paddingHorizontal: 5,
     paddingVertical: 2,
-    position: "absolute",
-    right: 10,
-    top: 58,
   },
   triggerModalText: {
     flexShrink: 1,

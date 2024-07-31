@@ -19,6 +19,7 @@ export const fr = {
   find_district: "Trouvez votre district",
   gso: "Bureau de service général",
   news: "Nouvelles",
+  noNews: "Aucune nouvelle à signaler.",
   share: "Partager",
   welcome:
     "Bienvenue! Pour commencer à utiliser ce nouveau service, veuillez sélectionner votre district de service général A.A. Veuillez noter que seule une partie de la Conférence est actuellement disponible. Plus sera ajouté bientôt.",

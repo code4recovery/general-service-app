@@ -4,6 +4,7 @@ import {
   RefreshControl,
   StyleSheet,
   useColorScheme,
+  View,
 } from "react-native";
 import Animated, {
   interpolate,
@@ -74,7 +75,6 @@ export default function ParallaxScrollView({
           ]}
         >
           {headerImage}
-          <ChangeDistrict />
         </Animated.View>
         <ThemedView style={styles.content}>
           {loading ? (
@@ -84,22 +84,29 @@ export default function ParallaxScrollView({
           )}
         </ThemedView>
       </Animated.ScrollView>
+      <View style={styles.changeDistrict}>
+        <ChangeDistrict />
+      </View>
     </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
+  changeDistrict: {
+    position: "absolute",
+    top: 58,
+    right: 10,
+  },
   container: {
     flex: 1,
+    position: "relative",
   },
   header: {
     height: 250,
     overflow: "hidden",
   },
   content: {
-    flex: 1,
-    padding: 24,
-    gap: 16,
+    flexGrow: 1,
     overflow: "hidden",
   },
   spinner: {

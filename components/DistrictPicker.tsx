@@ -26,6 +26,7 @@ type Area = {
 };
 
 type District = {
+  id: number;
   district: number;
   name: string;
   website: string;
@@ -35,7 +36,7 @@ type District = {
 };
 
 export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
-  const { district: selected, setDistrict } = useDistrict();
+  const { districtId: selected, setDistrictId } = useDistrict();
   const [areas, setAreas] = useState<Area[]>([]);
   const [geolocating, setGeolocating] = useState(false);
   const [selectedAreas, setSelectedAreas] = useState<number[]>([]);
@@ -80,7 +81,7 @@ export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
           booleanPointInPolygon(user, polygon([boundary]))
         );
         if (district) {
-          setDistrict(district.area + "-" + district.district);
+          setDistrictId(district.id);
           if (closeModal) {
             closeModal();
           }
@@ -99,15 +100,10 @@ export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
       .then((areas: Area[]) => {
         setAreas(areas);
         if (selected) {
-          const [selectedArea, selectedDistrict] = selected.split("-");
           setSelectedAreas(
             areas
-              .filter(
-                ({ area, districts }) =>
-                  selectedArea === area.toString() &&
-                  districts.some(
-                    ({ district }) => selectedDistrict === district.toString()
-                  )
+              .filter(({ districts }) =>
+                districts.some(({ id }) => selected === id)
               )
               .map(({ area }) => area)
           );
@@ -170,28 +166,25 @@ export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
             {selectedAreas.includes(area.area) &&
               area.districts
                 .sort((a, b) => a.district - b.district)
-                .map((district) => (
+                .map(({ id, district, name }) => (
                   <Pressable
-                    key={district.district}
+                    key={id}
                     style={{
                       ...styles.area,
                       ...styles.district,
                       borderColor,
                       backgroundColor:
-                        area.area + "-" + district.district === selected
-                          ? highlight
-                          : "transparent",
+                        id === selected ? highlight : "transparent",
                     }}
                     onPress={() => {
-                      setDistrict(area.area + "-" + district.district);
+                      setDistrictId(id);
                       if (closeModal) {
                         closeModal();
                       }
                     }}
                   >
                     <ThemedText>
-                      District {`${district.district}`.padStart(2, "0")}{" "}
-                      {district.name}
+                      District {`${district}`.padStart(2, "0")} {name}
                     </ThemedText>
                   </Pressable>
                 ))}

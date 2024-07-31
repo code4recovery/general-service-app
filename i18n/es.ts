@@ -18,6 +18,7 @@ export const es = {
   find_district: "Encuentra tu distrito",
   gso: "Oficina de Servicio General",
   news: "Noticias",
+  noNews: "No hay noticias que reportar.",
   share: "Compartir",
   welcome:
     "¡Bienvenido! Para comenzar a usar este nuevo servicio, selecciona tu distrito de Servicio General de A.A. Ten en cuenta que solo parte de la Conferencia está disponible actualmente. Pronto se agregará más.",
