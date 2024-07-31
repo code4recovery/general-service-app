@@ -17,21 +17,23 @@ export default function ContactScreen() {
       headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
       headerImage={<HeaderImage />}
     >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">{i18n.t("contact")}</ThemedText>
+      <ThemedView style={styles.container}>
+        <ThemedView style={styles.titleContainer}>
+          <ThemedText type="title">{i18n.t("contact")}</ThemedText>
+        </ThemedView>
+        <ThemedText>{i18n.t("contactDescription")}</ThemedText>
+        {entities?.map((entity, index) => (
+          <Collapsible title={entityName(entity)} key={index}>
+            {entity.links.map((contact, index) => (
+              <ThemedView key={index}>
+                <ExternalLink href={contact.target}>
+                  <ThemedText type="link">{contact.title}</ThemedText>
+                </ExternalLink>
+              </ThemedView>
+            ))}
+          </Collapsible>
+        ))}
       </ThemedView>
-      <ThemedText>{i18n.t("contactDescription")}</ThemedText>
-      {entities?.map((entity, index) => (
-        <Collapsible title={entityName(entity)} key={index}>
-          {entity.links.map((contact, index) => (
-            <ThemedView key={index}>
-              <ExternalLink href={contact.target}>
-                <ThemedText type="link">{contact.title}</ThemedText>
-              </ExternalLink>
-            </ThemedView>
-          ))}
-        </Collapsible>
-      ))}
     </ParallaxScrollView>
   );
 }
@@ -40,5 +42,9 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: "row",
     gap: 8,
+  },
+  container: {
+    padding: 24,
+    gap: 24,
   },
 });

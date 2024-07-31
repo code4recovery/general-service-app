@@ -30,7 +30,7 @@ export function ThemedButton({
     text: {
       color: highlighted ? backgroundColor : color,
       fontSize: primary ? 16 : 14,
-      fontWeight: 600,
+      fontWeight: "semibold",
       lineHeight: primary ? 20 : 16,
     },
   });

@@ -24,54 +24,56 @@ export default function AboutScreen() {
       headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
       headerImage={<HeaderImage />}
     >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">{i18n.t("about")}</ThemedText>
-      </ThemedView>
+      <ThemedView style={styles.container}>
+        <ThemedView style={styles.titleContainer}>
+          <ThemedText type="title">{i18n.t("about")}</ThemedText>
+        </ThemedView>
 
-      <Collapsible title={i18n.t("aboutMeetings")}>
-        <Pressable
-          onPress={() => openLink("https://meetingguide.org/download")}
-        >
-          <ThemedView style={styles.downloadPanel}>
-            <Image
-              source={require("../../assets/images/meeting-guide.png")}
-              style={styles.downloadIcon}
-            />
-            <ThemedView style={styles.downloadText}>
-              <ThemedText>{i18n.t("aboutDownload")}</ThemedText>
-              <ThemedView style={styles.downloadButton}>
-                <ThemedText style={styles.downloadButtonText}>
-                  {i18n.t("download")}
-                </ThemedText>
+        <Collapsible title={i18n.t("aboutMeetings")}>
+          <Pressable
+            onPress={() => openLink("https://meetingguide.org/download")}
+          >
+            <ThemedView style={styles.downloadPanel}>
+              <Image
+                source={require("../../assets/images/meeting-guide.png")}
+                style={styles.downloadIcon}
+              />
+              <ThemedView style={styles.downloadText}>
+                <ThemedText>{i18n.t("aboutDownload")}</ThemedText>
+                <ThemedView style={styles.downloadButton}>
+                  <ThemedText style={styles.downloadButtonText}>
+                    {i18n.t("download")}
+                  </ThemedText>
+                </ThemedView>
               </ThemedView>
             </ThemedView>
-          </ThemedView>
-        </Pressable>
-      </Collapsible>
+          </Pressable>
+        </Collapsible>
 
-      <ThemedText>{i18n.t("aboutDescription")}</ThemedText>
-      <ThemedText>{i18n.t("aboutLogin")}</ThemedText>
-      <ThemedView style={styles.ctaButtons}>
-        <Pressable
-          onPress={() => openLink("https://generalservice.app")}
-          style={styles.ctaButton}
-        >
-          <Ionicons name="globe-outline" size={20} color="#007AFF" />
-          <ThemedText style={styles.ctaButtonText}>
-            {i18n.t("aboutLoginButton", { site: "generalservice.app" })}
-          </ThemedText>
-        </Pressable>
-        {sharingIsAvailable && (
+        <ThemedText>{i18n.t("aboutDescription")}</ThemedText>
+        <ThemedText>{i18n.t("aboutLogin")}</ThemedText>
+        <ThemedView style={styles.ctaButtons}>
           <Pressable
-            onPress={() => Sharing.shareAsync("https://generalservice.app")}
+            onPress={() => openLink("https://generalservice.app")}
             style={styles.ctaButton}
           >
-            <Ionicons name="share-outline" size={20} color="#007AFF" />
+            <Ionicons name="globe-outline" size={20} color="#007AFF" />
             <ThemedText style={styles.ctaButtonText}>
-              {i18n.t("share")}
+              {i18n.t("aboutLoginButton", { site: "generalservice.app" })}
             </ThemedText>
           </Pressable>
-        )}
+          {sharingIsAvailable && (
+            <Pressable
+              onPress={() => Sharing.shareAsync("https://generalservice.app")}
+              style={styles.ctaButton}
+            >
+              <Ionicons name="share-outline" size={20} color="#007AFF" />
+              <ThemedText style={styles.ctaButtonText}>
+                {i18n.t("share")}
+              </ThemedText>
+            </Pressable>
+          )}
+        </ThemedView>
       </ThemedView>
     </ParallaxScrollView>
   );
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
   downloadButtonText: {
     color: "white",
     fontSize: 12,
-    fontWeight: 600,
+    fontWeight: "semibold",
     textTransform: "uppercase",
   },
   downloadIcon: {
@@ -126,6 +128,9 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flexDirection: "row",
-    gap: 8,
+  },
+  container: {
+    padding: 24,
+    gap: 24,
   },
 });
