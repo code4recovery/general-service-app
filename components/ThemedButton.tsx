@@ -26,6 +26,10 @@ export function ThemedButton({
       justifyContent: "center",
       paddingHorizontal: primary ? 20 : 18,
       paddingVertical: primary ? 12 : 10,
+      shadowColor: "black",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.2,
+      shadowRadius: 3,
     },
     text: {
       color: highlighted ? backgroundColor : color,

@@ -19,7 +19,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#00437C"
+        "backgroundColor": "#215488"
       },
       "package": "app.generalservice"
     },
