@@ -26,9 +26,12 @@ export const ContentProvider = ({ children }: PropsWithChildren) => {
   const { districtId } = useDistrict();
 
   useEffect(() => {
-    if (!districtId) return;
-    console.log(`fetching entities for ${districtId}`);
-    const url = `https://generalservice.app/storage/${districtId}.json?${new Date().getTime()}`;
+    if (!districtId || !loading) return;
+    const domain = __DEV__
+      ? "http://general-service-app-backend.test"
+      : "https://generalservice.app";
+    const url = `${domain}/storage/${districtId}.json?${new Date().getTime()}`;
+    console.log(`fetching entities from ${url}`);
     fetch(url)
       .then((response) => response.json())
       .then((entities) => setEntities(entities))
