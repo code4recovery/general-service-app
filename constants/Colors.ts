@@ -18,6 +18,16 @@ export const Colors = {
     tabIconSelected: tintColorLight,
     text: "#11181C",
     tint: tintColorLight,
+    separators: {
+      gso: "#D1B000",
+      area: "#03692C",
+      district: "#00437C",
+    },
+    buttons: {
+      gso: "#FFF099",
+      area: "#9CFCC2",
+      district: "#99CFFF",
+    },
   },
   dark: {
     background: "#151718",
@@ -30,5 +40,15 @@ export const Colors = {
     tabIconSelected: tintColorDark,
     text: "#ECEDEE",
     tint: tintColorDark,
+    separators: {
+      gso: "#524500",
+      area: "#024F21",
+      district: "#002C52",
+    },
+    buttons: {
+      gso: "#665500",
+      area: "#03692C",
+      district: "#00437C",
+    },
   },
 };

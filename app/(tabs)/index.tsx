@@ -17,6 +17,9 @@ export default function HomeScreen() {
   const { entities } = useContent();
   const colors = useColors();
 
+  const entityType = (index: number) =>
+    index === 0 ? "district" : index === 1 ? "area" : "gso";
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -25,15 +28,17 @@ export default function HomeScreen() {
       <ThemedView style={styles.heading}>
         <ThemedText type="title">{i18n.t("news")}</ThemedText>
       </ThemedView>
-      {entities?.map((entity) => (
+      {entities?.map((entity, index) => (
         <ThemedView key={entity.id}>
           <ThemedView
             style={{
               ...styles.entitySeparator,
-              backgroundColor: colors.secondary,
+              backgroundColor: colors.separators[entityType(index)],
             }}
           >
-            <ThemedText type="defaultSemiBold">{entityName(entity)}</ThemedText>
+            <ThemedText type="separator">
+              {entityName(entity).toUpperCase()}
+            </ThemedText>
           </ThemedView>
           <ThemedView style={styles.stories}>
             {entity.stories.length === 0 && (
@@ -52,7 +57,7 @@ export default function HomeScreen() {
                     <ThemedButton
                       key={id}
                       onPress={() => openLink(link)}
-                      primary
+                      theme={entityType(index)}
                       title={title}
                     />
                   ))}

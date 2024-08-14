@@ -83,10 +83,10 @@ export default function ParallaxScrollView({
             children
           )}
         </ThemedView>
+        <View style={styles.changeDistrict}>
+          <ChangeDistrict />
+        </View>
       </Animated.ScrollView>
-      <View style={styles.changeDistrict}>
-        <ChangeDistrict />
-      </View>
     </ThemedView>
   );
 }

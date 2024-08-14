@@ -5,14 +5,7 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
-  type?:
-    | "default"
-    | "title"
-    | "defaultSemiBold"
-    | "subtitle"
-    | "link"
-    | "separator"
-    | "small";
+  type?: "default" | "title" | "subtitle" | "link" | "separator" | "small";
 };
 
 export function ThemedText({
@@ -32,7 +25,6 @@ export function ThemedText({
         type === "default" ? styles.default : undefined,
         type === "title" ? styles.title : undefined,
         type === "separator" ? styles.separator : undefined,
-        type === "defaultSemiBold" ? styles.defaultSemiBold : undefined,
         type === "small" ? styles.small : undefined,
         type === "subtitle" ? styles.subtitle : undefined,
         type === "link" ? { ...styles.link, color: linkColor } : undefined,
@@ -48,28 +40,24 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
   },
-  defaultSemiBold: {
-    fontSize: 16,
-    lineHeight: 24,
-    fontWeight: "semibold",
-  },
   title: {
-    fontSize: 32,
-    fontWeight: "bold",
+    fontSize: 24,
     lineHeight: 40,
+    fontWeight: 300,
   },
   subtitle: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 600,
   },
   link: {
     lineHeight: 30,
     fontSize: 16,
   },
   separator: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 16,
     lineHeight: 24,
+    fontWeight: "bold",
+    color: "white",
   },
   small: {
     fontSize: 14,

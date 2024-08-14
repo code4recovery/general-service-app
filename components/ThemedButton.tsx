@@ -5,37 +5,36 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 
 export function ThemedButton({
   onPress,
-  primary = false,
-  highlighted = false,
   title,
+  theme,
 }: {
   onPress?: () => void;
   primary?: boolean;
-  highlighted?: boolean;
   title: string;
+  theme: "gso" | "area" | "district";
 }) {
-  const backgroundColor = useThemeColor(primary ? "primary" : "secondary");
+  const backgroundColor = useThemeColor(theme, "buttons");
   const color = useThemeColor("text");
 
   const styles = StyleSheet.create({
     button: {
       alignItems: "center",
-      backgroundColor: highlighted ? color : backgroundColor,
+      backgroundColor,
       borderRadius: 3,
       elevation: 3,
       justifyContent: "center",
-      paddingHorizontal: primary ? 20 : 18,
-      paddingVertical: primary ? 12 : 10,
+      paddingHorizontal: 20,
+      paddingVertical: 12,
       shadowColor: "black",
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.2,
       shadowRadius: 3,
     },
     text: {
-      color: highlighted ? backgroundColor : color,
-      fontSize: primary ? 16 : 14,
+      color,
+      fontSize: 16,
       fontWeight: "semibold",
-      lineHeight: primary ? 20 : 16,
+      lineHeight: 20,
     },
   });
 
