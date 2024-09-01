@@ -41,9 +41,10 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   title: {
-    fontSize: 24,
-    lineHeight: 40,
-    fontWeight: 300,
+    fontSize: 30,
+    lineHeight: 38,
+    fontWeight: 800,
+    letterSpacing: -0.5,
   },
   subtitle: {
     fontSize: 20,
@@ -54,10 +55,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   separator: {
-    fontSize: 16,
+    fontSize: 15,
     lineHeight: 24,
     fontWeight: "bold",
-    color: "white",
+    textTransform: "uppercase",
   },
   small: {
     fontSize: 14,

@@ -4,8 +4,10 @@ import { Platform } from "react-native";
 import * as NavigationBar from "expo-navigation-bar";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
-import { useColors } from "@/hooks/useColors";
+import { TriangleIcon } from "@/components/navigation/TriangleIcon";
+
 import { i18n } from "@/helpers/i18n";
+import { useColors } from "@/hooks/useColors";
 
 export default function TabLayout() {
   const colors = useColors();
@@ -36,11 +38,41 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: i18n.t("news"),
+          title: i18n.t("districtTab"),
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "newspaper" : "newspaper-outline"}
+            <TriangleIcon
               color={color}
+              type="district"
+              bg={colors.tabBackground}
+              focused={focused}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="area"
+        options={{
+          title: i18n.t("areaTab"),
+          tabBarIcon: ({ color, focused }) => (
+            <TriangleIcon
+              color={color}
+              type="area"
+              bg={colors.tabBackground}
+              focused={focused}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="gso"
+        options={{
+          title: i18n.t("gsoTab"),
+          tabBarIcon: ({ color, focused }) => (
+            <TriangleIcon
+              color={color}
+              type="gso"
+              bg={colors.tabBackground}
+              focused={focused}
             />
           ),
         }}
@@ -54,18 +86,6 @@ export default function TabLayout() {
               name={
                 focused ? "information-circle" : "information-circle-outline"
               }
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="contact"
-        options={{
-          title: i18n.t("contact"),
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "chatbubble" : "chatbubble-outline"}
               color={color}
             />
           ),

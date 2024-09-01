@@ -6,6 +6,15 @@
 const tintColorLight = "#687076";
 const tintColorDark = "#fff";
 
+const lightGold = "#D1B000";
+const darkGold = "#665500";
+
+const lightBlue = "#99ccff";
+const darkBlue = "#0066cc";
+
+const lightGreen = "#9CFCC2";
+const darkGreen = "#03692C";
+
 export const Colors = {
   light: {
     background: "#fff",
@@ -18,15 +27,15 @@ export const Colors = {
     tabIconSelected: tintColorLight,
     text: "#11181C",
     tint: tintColorLight,
-    separators: {
-      gso: "#D1B000",
-      area: "#03692C",
-      district: "#00437C",
+    titles: {
+      gso: darkGold,
+      area: darkGreen,
+      district: darkBlue,
     },
     buttons: {
-      gso: "#FFF099",
-      area: "#9CFCC2",
-      district: "#99CFFF",
+      gso: lightGold,
+      area: lightGreen,
+      district: lightBlue,
     },
   },
   dark: {
@@ -40,15 +49,15 @@ export const Colors = {
     tabIconSelected: tintColorDark,
     text: "#ECEDEE",
     tint: tintColorDark,
-    separators: {
-      gso: "#524500",
-      area: "#024F21",
-      district: "#002C52",
+    titles: {
+      gso: lightGold,
+      area: lightGreen,
+      district: lightBlue,
     },
     buttons: {
-      gso: "#665500",
-      area: "#03692C",
-      district: "#00437C",
+      gso: darkGold,
+      area: darkGreen,
+      district: darkBlue,
     },
   },
 };
