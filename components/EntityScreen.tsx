@@ -50,7 +50,7 @@ export function EntityScreen({
             }}
           >
             <ThemedText type="separator" style={{ opacity: 0.8 }}>
-              Announcements & Events
+              {i18n.t("announcementsAndEvents")}
             </ThemedText>
           </ThemedView>
         )}
@@ -77,7 +77,10 @@ export function EntityScreen({
                       onPress={() =>
                         buttonType === "link"
                           ? openLink(rest as LinkButton)
-                          : addToCalendar(rest as AddToCalendarButton)
+                          : addToCalendar({
+                              title,
+                              ...rest,
+                            } as AddToCalendarButton)
                       }
                       theme={type}
                       title={title}
@@ -99,7 +102,7 @@ export function EntityScreen({
               }}
             >
               <ThemedText type="separator" style={{ opacity: 0.8 }}>
-                Links
+                {i18n.t("links")}
               </ThemedText>
             </ThemedView>
             <ThemedView style={styles.links}>

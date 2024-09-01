@@ -15,7 +15,9 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "app.generalservice",
-      "buildNumber": "3"
+      "buildNumber": "3",
+      "NSCalendarsUsageDescription": "General Service needs permission to add events to your calendar when requested.",
+      "NSLocationWhenInUseUsageDescription": "General Service uses your location to find your district. Full privacy policy at https://generalservie.app/privacy"
     },
     "android": {
       "adaptiveIcon": {
@@ -33,7 +35,13 @@
     "plugins": [
       "expo-router",
       "expo-localization",
-      "expo-location"
+      "expo-location",
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "The app needs access to your calendar to add an event."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

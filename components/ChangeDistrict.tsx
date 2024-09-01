@@ -31,7 +31,10 @@ export function ChangeDistrict() {
   return (
     <>
       <Pressable
-        style={styles.triggerModal}
+        style={{
+          ...styles.triggerModal,
+          backgroundColor: colorScheme === "light" ? "#ffffff77" : "#00000077",
+        }}
         onPress={() => setModalVisible(true)}
       >
         <Ionicons name="location-outline" size={16} color={iconColor} />
@@ -57,8 +60,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     gap: 4,
-    paddingHorizontal: 5,
-    paddingVertical: 2,
+    paddingHorizontal: 8,
+    paddingVertical: 5,
   },
   triggerModalText: {
     flexShrink: 1,

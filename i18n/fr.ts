@@ -7,20 +7,23 @@ export const fr = {
     "Les présidents de district sont invités à utiliser ce service dans leur district. Ils peuvent se connecter sur notre site Web.",
   aboutLoginButton: "Visitez {{site}}",
   aboutMeetings: "Vous cherchez des réunions A.A.?",
+  announcementsAndEvents: "Annonces et événements",
   area: "Région {{number}}: {{name}}",
   changeDistrict: "Changer de district",
-  contact: "Contact",
-  contactDescription:
-    "Vous avez une question? Ces personnes peuvent peut-être vous aider:",
   district: "District {{number}}: {{name}}",
   districtNotFound:
     "Impossible de trouver votre emplacement dans un district dans nos dossiers.",
   download: "Télécharger",
+  error: "Erreur",
+  errorCalendarEvent: "Impossible d'ajouter l'événement au calendrier",
+  errorCalendarNoAccess: "Impossible d'accéder au calendrier",
   find_district: "Trouvez votre district",
   gso: "Bureau de service général",
+  links: "Liens",
   news: "Nouvelles",
   noNews: "Aucune nouvelle à signaler.",
   share: "Partager",
+  success: "Succès",
   welcome:
     "Bienvenue! Pour commencer à utiliser ce nouveau service, veuillez sélectionner votre district de service général A.A. Veuillez noter que seule une partie de la Conférence est actuellement disponible. Plus sera ajouté bientôt.",
 };
