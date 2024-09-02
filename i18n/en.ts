@@ -14,7 +14,7 @@ export const en = {
   district: "District {{number}}: {{name}}",
   districtTab: "District",
   districtNotFound:
-    "Could not find your location within a district in our records.",
+    "Could not find your location within a district currently participating in the app. The districts below are available.",
   download: "Download",
   error: "Error",
   errorCalendarEvent: "Could not add event to calendar",
@@ -23,10 +23,12 @@ export const en = {
   gso: "General Service Office",
   gsoTab: "G.S.O.",
   links: "Links",
+  locating: "Locating…",
   news: "News",
   noNews: "No news to report.",
   share: "Share",
   success: "Success",
+  useMyLocation: "Use my location",
   welcome:
     "Welcome! To get started using this new service, please select your A.A. General Service district. Please note that only part of the Conference is currently available. More will be added soon.",
 };

@@ -12,7 +12,7 @@ export const fr = {
   changeDistrict: "Changer de district",
   district: "District {{number}}: {{name}}",
   districtNotFound:
-    "Impossible de trouver votre emplacement dans un district dans nos dossiers.",
+    "Impossible de trouver votre emplacement dans un district actuellement participant à l'application. Les districts ci-dessous sont disponibles.",
   download: "Télécharger",
   error: "Erreur",
   errorCalendarEvent: "Impossible d'ajouter l'événement au calendrier",
@@ -20,10 +20,12 @@ export const fr = {
   find_district: "Trouvez votre district",
   gso: "Bureau de service général",
   links: "Liens",
+  locating: "Localisation…",
   news: "Nouvelles",
   noNews: "Aucune nouvelle à signaler.",
   share: "Partager",
   success: "Succès",
+  useMyLocation: "Utiliser ma position",
   welcome:
     "Bienvenue! Pour commencer à utiliser ce nouveau service, veuillez sélectionner votre district de service général A.A. Veuillez noter que seule une partie de la Conférence est actuellement disponible. Plus sera ajouté bientôt.",
 };

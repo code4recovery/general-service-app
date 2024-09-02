@@ -12,7 +12,7 @@ export const es = {
   changeDistict: "Cambiar Distrito",
   district: "Distrito {{number}}: {{name}}",
   districtNotFound:
-    "No se pudo encontrar tu ubicación dentro de un distrito en nuestros registros.",
+    "No se pudo encontrar tu ubicación dentro de un distrito que participe actualmente en la aplicación. Los distritos a continuación están disponibles.",
   download: "Descargar",
   error: "Error",
   errorCalendarEvent: "No se pudo agregar el evento al calendario",
@@ -20,10 +20,12 @@ export const es = {
   find_district: "Encuentra tu distrito",
   gso: "Oficina de Servicio General",
   links: "Enlaces",
+  locating: "Localizando...",
   news: "Noticias",
   noNews: "No hay noticias que reportar.",
   share: "Compartir",
   success: "Éxito",
+  useMyLocation: "Usar mi ubicación",
   welcome:
     "¡Bienvenido! Para comenzar a usar este nuevo servicio, selecciona tu distrito de Servicio General de A.A. Ten en cuenta que solo parte de la Conferencia está disponible actualmente. Pronto se agregará más.",
 };

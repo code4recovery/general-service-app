@@ -15,9 +15,13 @@ const darkBlue = "#0066cc";
 const lightGreen = "#9CFCC2";
 const darkGreen = "#03692C";
 
+const lightRed = "#FF7A7A";
+const darkRed = "#B00020";
+
 export const Colors = {
   light: {
     background: "#fff",
+    error: darkRed,
     icon: tintColorLight,
     link: "#007AFF",
     primary: "#99ccff",
@@ -40,6 +44,7 @@ export const Colors = {
   },
   dark: {
     background: "#151718",
+    error: lightRed,
     icon: "#9BA1A6",
     link: "#0984FF",
     primary: "#0066cc",

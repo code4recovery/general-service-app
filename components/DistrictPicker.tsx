@@ -33,6 +33,7 @@ type District = {
   language: string;
   color: string;
   boundary: number[][];
+  story_max: number | null;
 };
 
 export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
@@ -40,13 +41,17 @@ export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
   const [areas, setAreas] = useState<Area[]>([]);
   const [geolocating, setGeolocating] = useState(false);
   const [selectedAreas, setSelectedAreas] = useState<number[]>([]);
+  const [notFound, setNotFound] = useState(false);
 
+  const linkColor = useThemeColor("link");
+  const errorColor = useThemeColor("error");
+
+  // todo move to colors
   const colorScheme = useColorScheme() ?? "light";
   const backgroundColor: string = colorScheme === "light" ? "#eee" : "#222";
   const borderColor = colorScheme === "light" ? "#ccc" : "#333";
   const highlight = colorScheme === "light" ? "#f0f0f0" : "#333";
   const iconColor = colorScheme === "light" ? "black" : "white";
-  const linkColor = useThemeColor("link");
 
   const geolocate = () => {
     setGeolocating(true);
@@ -86,7 +91,7 @@ export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
             closeModal();
           }
         } else {
-          Alert.alert("Error", i18n.t("districtNotFound"));
+          setNotFound(true);
         }
       })
       .catch((error) => Alert.alert("Error", error.message))
@@ -98,6 +103,17 @@ export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
     fetch(`https://generalservice.app/storage/map.json?${new Date().getTime()}`)
       .then((response) => response.json())
       .then((areas: Area[]) => {
+        // filter areas
+        const now = new Date().getTime() / 1000;
+        areas = areas
+          .map(({ districts, ...rest }) => ({
+            ...rest,
+            districts: districts.filter(
+              ({ story_max }) => story_max && story_max > now
+            ),
+          }))
+          .filter((area) => area.districts.length);
+
         setAreas(areas);
         if (selected) {
           setSelectedAreas(
@@ -107,13 +123,20 @@ export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
               )
               .map(({ area }) => area)
           );
+        } else if (areas.length === 1) {
+          setSelectedAreas([areas[0].area]);
         }
       })
       .catch((error) => console.error(error));
   }, []);
 
   return (
-    <ThemedView style={{ ...styles.base, ...(closeModal ? styles.modal : {}) }}>
+    <ThemedView
+      style={{
+        ...styles.base,
+        ...(closeModal ? styles.modal : styles.nonModal),
+      }}
+    >
       {closeModal ? (
         <ThemedView style={{ ...styles.header, backgroundColor }}>
           <ThemedText style={styles.headerText}>
@@ -135,9 +158,21 @@ export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
         >
           <Ionicons name="locate-outline" size={22} color={linkColor} />
           <ThemedText type="link" style={styles.geoButtonText}>
-            {geolocating ? "Locating..." : "Use My Location"}
+            {geolocating ? i18n.t("locating") : i18n.t("useMyLocation")}
           </ThemedText>
         </Pressable>
+
+        {notFound && (
+          <ThemedText
+            style={{
+              color: errorColor,
+              paddingHorizontal: 16,
+              paddingVertical: 8,
+            }}
+          >
+            {i18n.t("districtNotFound")}
+          </ThemedText>
+        )}
         {areas.map((area) => (
           <Fragment key={area.area}>
             <Pressable
@@ -210,7 +245,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    marginTop: 60,
   },
   body: {
     width: "100%",
@@ -257,6 +291,10 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
+    marginTop: 60,
+  },
+  nonModal: {
+    paddingTop: 60,
   },
   welcome: {
     padding: 16,
