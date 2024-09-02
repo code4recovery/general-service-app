@@ -15,6 +15,12 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "joshreisner@mac.com",
+        "ascAppId": "6670377389",
+        "appleTeamId": "QZDN3LR5DD"
+      }
+    }
   }
 }

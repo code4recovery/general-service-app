@@ -1,6 +1,6 @@
 import { ImageBackground, StyleSheet } from "react-native";
 
-export function HeaderImage({ uri }: { uri: string }) {
+export function HeaderImage({ uri }: { uri?: string }) {
   return uri ? (
     <ImageBackground
       resizeMode="cover"

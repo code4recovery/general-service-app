@@ -75,8 +75,8 @@ export function EntityScreen({
                     <ThemedButton
                       key={id}
                       onPress={() =>
-                        buttonType === "link"
-                          ? openLink(rest as LinkButton)
+                        buttonType === "link" && "link" in rest
+                          ? openLink(rest.link as string)
                           : addToCalendar({
                               title,
                               ...rest,

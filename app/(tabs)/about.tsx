@@ -1,4 +1,4 @@
-import { Image, Pressable, StyleSheet } from "react-native";
+import { Image, Platform, Pressable, StyleSheet } from "react-native";
 import * as Sharing from "expo-sharing";
 
 import { Collapsible } from "@/components/Collapsible";
@@ -14,6 +14,9 @@ import { useEffect, useState } from "react";
 export default function AboutScreen() {
   const [sharingIsAvailable, setSharingIsAvailable] = useState(false);
   useEffect(() => {
+    if (Platform.OS !== "ios") {
+      return;
+    }
     Sharing.isAvailableAsync().then((result) => {
       setSharingIsAvailable(result);
     });
@@ -64,7 +67,11 @@ export default function AboutScreen() {
           </Pressable>
           {sharingIsAvailable && (
             <Pressable
-              onPress={() => Sharing.shareAsync("https://generalservice.app")}
+              onPress={() =>
+                Sharing.shareAsync("https://generalservice.app").catch((e) =>
+                  console.error(e)
+                )
+              }
               style={styles.ctaButton}
             >
               <Ionicons name="share-outline" size={20} color="#007AFF" />

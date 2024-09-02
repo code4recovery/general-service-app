@@ -11,7 +11,7 @@ export function ExternalLink({ href, ...rest }: Props) {
     <Link
       target="_blank"
       {...rest}
-      href={href}
+      href=""
       onPress={(e) => {
         e.preventDefault();
         openLink(href);
