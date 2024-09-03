@@ -15,9 +15,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "app.generalservice.www",
-      "buildNumber": "7",
-      "NSCalendarsUsageDescription": "General Service needs permission to add events to your calendar when requested.",
-      "NSLocationWhenInUseUsageDescription": "General Service uses your location to find your district. Full privacy policy at https://generalservie.app/privacy",
+      "buildNumber": "8",
+      "infoPlist": {
+        "NSCalendarsUsageDescription": "General Service needs permission to add events to your calendar when requested.",
+        "NSLocationWhenInUseUsageDescription": "General Service uses your location to find your district. Full privacy policy at https://generalservice.app/privacy"
+      },
       "config": {
         "usesNonExemptEncryption": false
       },
@@ -31,7 +33,7 @@
         "backgroundColor": "#215488"
       },
       "package": "app.generalservice",
-      "versionCode": 6
+      "versionCode": 7
     },
     "web": {
       "bundler": "metro",
