@@ -11,6 +11,7 @@ export type AddToCalendarButton = {
   story_id: number;
   title: string;
   type: "calendar";
+  event_title: string;
   formatted_address: string;
   start: string;
   end: string;

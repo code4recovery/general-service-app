@@ -7,7 +7,7 @@ import { AddToCalendarButton } from "./types";
 import { i18n } from "@/helpers/i18n";
 
 export async function addToCalendar({
-  title,
+  event_title: title,
   formatted_address,
   start,
   end,
