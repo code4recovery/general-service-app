@@ -8,12 +8,10 @@ import { ThemedView } from "@/components/ThemedView";
 
 import { useColors } from "@/hooks/useColors";
 
-import { entityName } from "@/helpers/entity-name";
 import { addToCalendar } from "@/helpers/add-to-calendar";
 import { openLink } from "@/helpers/open-link";
 import { i18n } from "@/helpers/i18n";
-import { Entity, LinkButton, AddToCalendarButton } from "@/helpers/types";
-import { ExternalLink } from "./ExternalLink";
+import { Entity, AddToCalendarButton } from "@/helpers/types";
 
 export function EntityScreen({
   entity,
@@ -36,82 +34,74 @@ export function EntityScreen({
     >
       <ThemedView style={styles.container}>
         <ThemedText type="title" style={{ color: colors.titles[type] }}>
-          {entityName(entity)}
+          {entity.name}
         </ThemedText>
       </ThemedView>
       <ThemedView key={entity.id}>
-        {!!entity.stories.length && (
-          <ThemedView
-            style={{
-              ...styles.separator,
-              backgroundColor: colors.tabBackground,
-              borderBottomColor: colors.secondary,
-              borderTopColor: colors.secondary,
-            }}
-          >
-            <ThemedText type="separator" style={{ opacity: 0.8 }}>
-              {i18n.t("announcementsAndEvents")}
-            </ThemedText>
-          </ThemedView>
-        )}
-        <ThemedView style={styles.stories}>
-          {entity.stories.length === 0 && (
-            <ThemedView style={styles.story}>
-              <ThemedText>{i18n.t("noNews")}</ThemedText>
-            </ThemedView>
-          )}
-          {entity.stories.map((story) => (
-            <ThemedView style={styles.story} key={story.id}>
-              <ThemedText type="subtitle">{story.title}</ThemedText>
-              {story.description
-                .split("\r\n")
-                .filter((text) => text.trim())
-                .map((text, index) => (
-                  <ThemedText key={index}>{text}</ThemedText>
+        {entity.stories.length ? (
+          entity.stories.map(({ category, items }) => (
+            <>
+              <ThemedView
+                style={{
+                  ...styles.separator,
+                  backgroundColor: colors.tabBackground,
+                  borderBottomColor: colors.secondary,
+                  borderTopColor: colors.secondary,
+                }}
+              >
+                <ThemedText type="separator" style={{ opacity: 0.8 }}>
+                  {i18n.t(category)}
+                </ThemedText>
+              </ThemedView>
+              <ThemedView style={styles.stories}>
+                {items.map((story) => (
+                  <ThemedView style={styles.story} key={story.id}>
+                    <ThemedText type="subtitle">{story.title}</ThemedText>
+                    {story.description
+                      .split("\r\n")
+                      .filter((text) => text.trim())
+                      .map((text, index) => (
+                        <ThemedText key={index}>{text}</ThemedText>
+                      ))}
+                    <ThemedView style={styles.storyButtons}>
+                      {story.buttons.map(
+                        ({ id, title, type: buttonType, ...rest }) => (
+                          <ThemedButton
+                            key={id}
+                            onPress={() =>
+                              buttonType === "link" && "link" in rest
+                                ? openLink(rest.link as string)
+                                : addToCalendar(rest as AddToCalendarButton)
+                            }
+                            theme={type}
+                            title={title}
+                          />
+                        )
+                      )}
+                    </ThemedView>
+                  </ThemedView>
                 ))}
-              <ThemedView style={styles.storyButtons}>
-                {story.buttons.map(
-                  ({ id, title, type: buttonType, ...rest }) => (
-                    <ThemedButton
-                      key={id}
-                      onPress={() =>
-                        buttonType === "link" && "link" in rest
-                          ? openLink(rest.link as string)
-                          : addToCalendar(rest as AddToCalendarButton)
-                      }
-                      theme={type}
-                      title={title}
-                    />
-                  )
-                )}
+              </ThemedView>
+            </>
+          ))
+        ) : (
+          <ThemedView style={{ ...styles.stories, paddingTop: 0 }}>
+            <ThemedView style={styles.story}>
+              <ThemedText key="title" type="subtitle">
+                {i18n.t("notParticipatingTitle", { entity: type })}
+              </ThemedText>
+              <ThemedText key="content">
+                {i18n.t("notParticipatingDescription")}
+              </ThemedText>
+              <ThemedView style={{ ...styles.storyButtons, paddingTop: 16 }}>
+                <ThemedButton
+                  onPress={() => openLink("https://generalservice.app")}
+                  theme={type}
+                  title={i18n.t("learnMore")}
+                />
               </ThemedView>
             </ThemedView>
-          ))}
-        </ThemedView>
-        {!!entity.links.length && (
-          <>
-            <ThemedView
-              style={{
-                ...styles.separator,
-                backgroundColor: colors.tabBackground,
-                borderBottomColor: colors.secondary,
-                borderTopColor: colors.secondary,
-              }}
-            >
-              <ThemedText type="separator" style={{ opacity: 0.8 }}>
-                {i18n.t("links")}
-              </ThemedText>
-            </ThemedView>
-            <ThemedView style={styles.links}>
-              {entity.links.map((contact, index) => (
-                <ThemedView key={index}>
-                  <ExternalLink href={contact.target}>
-                    <ThemedText type="link">{contact.title}</ThemedText>
-                  </ExternalLink>
-                </ThemedView>
-              ))}
-            </ThemedView>
-          </>
+          </ThemedView>
         )}
       </ThemedView>
     </ParallaxScrollView>

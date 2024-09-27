@@ -1,5 +1,4 @@
 import { Linking, Platform, Alert } from "react-native";
-import { LinkButton } from "./types";
 
 export async function openLink(href: string) {
   if (href.includes("@") && !href.startsWith("mailto:")) {

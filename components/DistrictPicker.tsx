@@ -17,24 +17,9 @@ import { useDistrict } from "@/hooks/useDistrict";
 import * as Location from "expo-location";
 import { point, polygon } from "@turf/helpers";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
-
-type Area = {
-  area: number;
-  name: string;
-  website: string;
-  districts: District[];
-};
-
-type District = {
-  id: number;
-  district: number;
-  name: string;
-  website: string;
-  language: string;
-  color: string;
-  boundary: number[][];
-  story_max: number | null;
-};
+import { entityName } from "@/helpers/entity-name";
+import type { Area } from "@/helpers/types";
+import { useRouter } from "expo-router";
 
 export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
   const { districtId: selected, setDistrictId } = useDistrict();
@@ -42,6 +27,7 @@ export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
   const [geolocating, setGeolocating] = useState(false);
   const [selectedAreas, setSelectedAreas] = useState<number[]>([]);
   const [notFound, setNotFound] = useState(false);
+  const router = useRouter();
 
   const linkColor = useThemeColor("link");
   const errorColor = useThemeColor("error");
@@ -103,17 +89,6 @@ export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
     fetch(`https://generalservice.app/storage/map.json?${new Date().getTime()}`)
       .then((response) => response.json())
       .then((areas: Area[]) => {
-        // filter areas
-        const now = new Date().getTime() / 1000;
-        areas = areas
-          .map(({ districts, ...rest }) => ({
-            ...rest,
-            districts: districts.filter(
-              ({ story_max }) => story_max && story_max > now
-            ),
-          }))
-          .filter((area) => area.districts.length);
-
         setAreas(areas);
         if (selected) {
           setSelectedAreas(
@@ -194,35 +169,32 @@ export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
                 size={16}
                 color={iconColor}
               />
-              <ThemedText>
-                Area {`${area.area}`.padStart(2, "0")} {area.name}
-              </ThemedText>
+              <ThemedText>{entityName(area)}</ThemedText>
             </Pressable>
             {selectedAreas.includes(area.area) &&
-              area.districts
-                .sort((a, b) => a.district - b.district)
-                .map(({ id, district, name }) => (
-                  <Pressable
-                    key={id}
-                    style={{
-                      ...styles.area,
-                      ...styles.district,
-                      borderColor,
-                      backgroundColor:
-                        id === selected ? highlight : "transparent",
-                    }}
-                    onPress={() => {
-                      setDistrictId(id);
-                      if (closeModal) {
-                        closeModal();
-                      }
-                    }}
-                  >
-                    <ThemedText>
-                      District {`${district}`.padStart(2, "0")} {name}
-                    </ThemedText>
-                  </Pressable>
-                ))}
+              area.districts.map(({ id, district, name }) => (
+                <Pressable
+                  key={id}
+                  style={{
+                    ...styles.area,
+                    ...styles.district,
+                    borderColor,
+                    backgroundColor:
+                      id === selected ? highlight : "transparent",
+                  }}
+                  onPress={() => {
+                    setDistrictId(id);
+                    if (closeModal) {
+                      router.push("/");
+                      closeModal();
+                    }
+                  }}
+                >
+                  <ThemedText>
+                    {entityName({ area: area.area, district, name })}
+                  </ThemedText>
+                </Pressable>
+              ))}
           </Fragment>
         ))}
       </ScrollView>

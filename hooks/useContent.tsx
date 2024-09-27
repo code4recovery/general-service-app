@@ -7,6 +7,7 @@ import {
 } from "react";
 
 import { type Entity } from "@/helpers/types";
+import { processEntities } from "@/helpers/process-entities";
 import { useDistrict } from "@/hooks/useDistrict";
 import { DistrictPicker } from "@/components/DistrictPicker";
 
@@ -27,14 +28,14 @@ export const ContentProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     if (!districtId) return;
-    const domain =
-      //__DEV__ ? "http://general-service-app-backend.test" :
-      "https://generalservice.app";
+    const domain = __DEV__
+      ? "http://general-service-app-backend.test"
+      : "https://generalservice.app";
     const url = `${domain}/storage/${districtId}.json?${new Date().getTime()}`;
     console.log(`fetching entities from ${url}`);
     fetch(url)
       .then((response) => response.json())
-      .then((entities) => setEntities(entities))
+      .then((entities) => setEntities(processEntities(entities)))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, [districtId, loading]);

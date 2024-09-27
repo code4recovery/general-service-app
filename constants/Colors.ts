@@ -7,12 +7,12 @@ const tintColorLight = "#687076";
 const tintColorDark = "#fff";
 
 const lightGold = "#D1B000";
-const darkGold = "#665500";
+const darkGold = "#927B00";
 
 const lightBlue = "#99ccff";
 const darkBlue = "#0066cc";
 
-const lightGreen = "#9CFCC2";
+const lightGreen = "#b3d2bf";
 const darkGreen = "#03692C";
 
 const lightRed = "#FF7A7A";
@@ -46,7 +46,7 @@ export const Colors = {
     background: "#151718",
     error: lightRed,
     icon: "#9BA1A6",
-    link: "#0984FF",
+    link: "#3A9CFF",
     primary: "#0066cc",
     secondary: "#3c3c3c",
     tabBackground: "#272727",
