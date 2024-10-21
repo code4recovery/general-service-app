@@ -12,7 +12,7 @@ const darkGold = "#927B00";
 const lightBlue = "#99ccff";
 const darkBlue = "#0066cc";
 
-const lightGreen = "#b3d2bf";
+const lightGreen = "#82D9A5";
 const darkGreen = "#03692C";
 
 const lightRed = "#FF7A7A";

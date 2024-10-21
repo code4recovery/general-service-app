@@ -12,6 +12,7 @@ import { addToCalendar } from "@/helpers/add-to-calendar";
 import { openLink } from "@/helpers/open-link";
 import { i18n } from "@/helpers/i18n";
 import { Entity, AddToCalendarButton } from "@/helpers/types";
+import { Fragment } from "react";
 
 export function EntityScreen({
   entity,
@@ -39,8 +40,8 @@ export function EntityScreen({
       </ThemedView>
       <ThemedView key={entity.id}>
         {entity.stories.length ? (
-          entity.stories.map(({ category, items }) => (
-            <>
+          entity.stories.map(({ category, items }, index) => (
+            <Fragment key={index}>
               <ThemedView
                 style={{
                   ...styles.separator,
@@ -82,7 +83,7 @@ export function EntityScreen({
                   </ThemedView>
                 ))}
               </ThemedView>
-            </>
+            </Fragment>
           ))
         ) : (
           <ThemedView style={{ ...styles.stories, paddingTop: 0 }}>

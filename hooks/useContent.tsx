@@ -28,9 +28,9 @@ export const ContentProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     if (!districtId) return;
-    const domain = __DEV__
-      ? "http://general-service-app-backend.test"
-      : "https://generalservice.app";
+    const domain =
+      //__DEV__ ? "http://general-service-app-backend.test" :
+      "https://generalservice.app";
     const url = `${domain}/storage/${districtId}.json?${new Date().getTime()}`;
     console.log(`fetching entities from ${url}`);
     fetch(url)

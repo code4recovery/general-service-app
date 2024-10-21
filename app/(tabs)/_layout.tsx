@@ -39,8 +39,8 @@ export default function TabLayout() {
         name="index"
         options={{
           title: i18n.t("districtTab"),
-          tabBarIcon: ({ color, focused }) => (
-            <TriangleIcon color={color} focused={focused} type="district" />
+          tabBarIcon: ({ focused }) => (
+            <TriangleIcon focused={focused} type="district" />
           ),
         }}
       />
@@ -48,8 +48,8 @@ export default function TabLayout() {
         name="area"
         options={{
           title: i18n.t("areaTab"),
-          tabBarIcon: ({ color, focused }) => (
-            <TriangleIcon color={color} focused={focused} type="area" />
+          tabBarIcon: ({ focused }) => (
+            <TriangleIcon focused={focused} type="area" />
           ),
         }}
       />
@@ -57,8 +57,8 @@ export default function TabLayout() {
         name="gso"
         options={{
           title: i18n.t("gsoTab"),
-          tabBarIcon: ({ color, focused }) => (
-            <TriangleIcon color={color} focused={focused} type="gso" />
+          tabBarIcon: ({ focused }) => (
+            <TriangleIcon focused={focused} type="gso" />
           ),
         }}
       />
