@@ -13,12 +13,13 @@
       "backgroundColor": "#00437C"
     },
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "app.generalservice.www",
       "buildNumber": "8",
       "infoPlist": {
         "NSCalendarsUsageDescription": "General Service needs permission to add events to your calendar when requested.",
-        "NSLocationWhenInUseUsageDescription": "General Service uses your location to find your district. Full privacy policy at https://generalservice.app/privacy"
+        "NSLocationWhenInUseUsageDescription": "General Service uses your location to find your district. Full privacy policy at https://generalservice.app/privacy",
+        "LSMinimumSystemVersion": "12.0"
       },
       "config": {
         "usesNonExemptEncryption": false
