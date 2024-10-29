@@ -1,10 +1,10 @@
 export const fr = {
   about: "À propos",
   aboutDescription:
-    "Cette application est une ressource pour aider les représentants de service général A.A. à savoir ce qui se passe dans leur district, leur région et au bureau de service général.",
+    "Cette application est une ressource pour informer les serviteurs de confiance d'A.A. sur ce qui se passe dans leur district, leur région et au Bureau de service général.",
   aboutDownload: "Téléchargez l'application Meeting Guide",
   aboutLogin:
-    "Les présidents de district sont invités à utiliser ce service dans leur district. Ils peuvent se connecter sur notre site Web.",
+    "Les responsables de région et de district doivent se connecter à generalservice.app pour mettre à jour les informations.",
   aboutLoginButton: "Visitez {{site}}",
   aboutMeetings: "Vous cherchez des réunions A.A.?",
   area: "Région {{number}}: {{name}}",
