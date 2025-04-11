@@ -91,9 +91,6 @@ export function EntityScreen({
               <ThemedText key="title" type="subtitle">
                 {i18n.t("notParticipatingTitle", { entity: type })}
               </ThemedText>
-              <ThemedText key="content">
-                {i18n.t("notParticipatingDescription")}
-              </ThemedText>
               <ThemedView style={{ ...styles.storyButtons, paddingTop: 16 }}>
                 <ThemedButton
                   onPress={() => openLink("https://generalservice.app")}
