@@ -50,7 +50,8 @@
         {
           "calendarPermission": "The app needs access to your calendar to add an event."
         }
-      ]
+      ],
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
