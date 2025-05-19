@@ -1,13 +1,15 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Text, StyleSheet, Pressable } from "react-native";
 
 import { useThemeColor } from "@/hooks/useThemeColor";
 
 export function ThemedButton({
+  icon,
   onPress,
   title,
   theme,
 }: {
+  icon?: ReactNode;
   onPress?: () => void;
   primary?: boolean;
   title: string;
@@ -21,7 +23,10 @@ export function ThemedButton({
       alignItems: "center",
       backgroundColor,
       borderRadius: 3,
+      display: "flex",
       elevation: 3,
+      flexDirection: "row",
+      gap: 5,
       justifyContent: "center",
       paddingHorizontal: 14,
       paddingVertical: 9,
@@ -40,6 +45,7 @@ export function ThemedButton({
 
   return (
     <Pressable style={styles.button} onPress={onPress}>
+      {icon}
       <Text style={styles.text}>{title}</Text>
     </Pressable>
   );
