@@ -60,10 +60,15 @@ export function EntityScreen({
                   <ThemedView style={styles.story} key={story.id}>
                     <ThemedText type="subtitle">{story.title}</ThemedText>
                     {story.description
-                      .split("\r\n")
-                      .filter((text) => text.trim())
+                      .split("\r\n\r\n")
+                      .map((text) => text.trim())
+                      .filter((text) => text)
                       .map((text, index) => (
-                        <ThemedText key={index}>{text}</ThemedText>
+                        <ThemedView style={styles.paragraph} key={index}>
+                          {text.split("\r\n").map((text, index) => (
+                            <ThemedText key={index}>{text}</ThemedText>
+                          ))}
+                        </ThemedView>
                       ))}
                     <ThemedView style={styles.storyButtons}>
                       {story.buttons.map(
@@ -119,26 +124,30 @@ export function EntityScreen({
 const space = 24;
 
 const styles = StyleSheet.create({
+  container: {
+    padding: space,
+  },
+  links: {
+    padding: space,
+    paddingBottom: space * 2,
+  },
+  paragraph: {
+    display: "flex",
+    flexDirection: "column",
+  },
   separator: {
     borderBottomWidth: 1,
     borderTopWidth: 1,
     paddingHorizontal: space,
     paddingVertical: space / 2,
   },
-  container: {
-    padding: space,
-  },
-  story: {
-    gap: space / 2,
-  },
   stories: {
     padding: space,
     paddingBottom: space * 2,
     gap: space * 1.5,
   },
-  links: {
-    padding: space,
-    paddingBottom: space * 2,
+  story: {
+    gap: space / 2,
   },
   storyButtons: {
     display: "flex",
