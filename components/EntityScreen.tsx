@@ -13,6 +13,7 @@ import { openLink } from "@/helpers/open-link";
 import { i18n } from "@/helpers/i18n";
 import { Entity, AddToCalendarButton } from "@/helpers/types";
 import { Fragment } from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 export function EntityScreen({
   entity,
@@ -68,6 +69,15 @@ export function EntityScreen({
                       {story.buttons.map(
                         ({ id, title, type: buttonType, ...rest }) => (
                           <ThemedButton
+                            icon={
+                              buttonType === "link" &&
+                              "link" in rest &&
+                              [".pdf", ".doc", ".docx", ".xls", "xlsx"].some(
+                                (extension) => rest.link.endsWith(extension)
+                              ) ? (
+                                <Ionicons name="document-outline" size={16} />
+                              ) : null
+                            }
                             key={id}
                             onPress={() =>
                               buttonType === "link" && "link" in rest
