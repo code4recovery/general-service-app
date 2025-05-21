@@ -77,10 +77,14 @@ export function EntityScreen({
                             icon={
                               buttonType === "link" &&
                               "link" in rest &&
-                              [".pdf", ".doc", ".docx", ".xls", "xlsx"].some(
-                                (extension) => rest.link.endsWith(extension)
+                              fileExtensions.some((extension) =>
+                                rest.link.endsWith(extension)
                               ) ? (
-                                <Ionicons name="document-outline" size={16} />
+                                <Ionicons
+                                  name="document"
+                                  size={18}
+                                  color={colors.text}
+                                />
                               ) : null
                             }
                             key={id}
@@ -121,6 +125,17 @@ export function EntityScreen({
   );
 }
 
+const fileExtensions = [
+  ".doc",
+  ".docx",
+  ".key",
+  ".pdf",
+  ".ppt",
+  ".pptx",
+  ".xls",
+  "xlsx",
+];
+
 const space = 24;
 
 const styles = StyleSheet.create({
@@ -147,12 +162,13 @@ const styles = StyleSheet.create({
     gap: space * 1.5,
   },
   story: {
-    gap: space / 2,
+    gap: space / 1.5,
   },
   storyButtons: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     gap: space / 3,
+    marginTop: space / 4,
   },
 });
