@@ -33,6 +33,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#215488"
       },
+      "edgeToEdgeEnabled": true,
       "package": "app.generalservice",
       "versionCode": 8
     },
