@@ -7,18 +7,18 @@ import {
 } from "react-native";
 
 import { ThemedView } from "@/components/ThemedView";
-import { ThemedText } from "./ThemedText";
+import { i18n } from "@/helpers/i18n";
+import { useDistrict } from "@/hooks/useDistrict";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Fragment, useEffect, useState } from "react";
-import { i18n } from "@/helpers/i18n";
-import { useThemeColor } from "@/hooks/useThemeColor";
-import { useDistrict } from "@/hooks/useDistrict";
+import { ThemedText } from "./ThemedText";
 
-import * as Location from "expo-location";
-import { point, polygon } from "@turf/helpers";
-import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { entityName } from "@/helpers/entity-name";
 import type { Area } from "@/helpers/types";
+import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
+import { point, polygon } from "@turf/helpers";
+import * as Location from "expo-location";
 import { useRouter } from "expo-router";
 
 export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
@@ -67,12 +67,15 @@ export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
           .map((area) =>
             area.districts.map((district) => ({ ...district, area: area.area }))
           )
-          .flat();
-        const district = districts.find(({ boundary }) =>
-          booleanPointInPolygon(user, polygon([boundary]))
-        );
-        if (district) {
-          setDistrictId(district.id);
+          .flat()
+          .filter(({ boundary }) =>
+            booleanPointInPolygon(user, polygon([boundary]))
+          )
+          .sort((a, b) =>
+            a.language === i18n.locale ? -1 : b.language === i18n.locale ? 1 : 0
+          );
+        if (districts.length > 0) {
+          setDistrictId(districts[0].id);
           if (closeModal) {
             closeModal();
           }
