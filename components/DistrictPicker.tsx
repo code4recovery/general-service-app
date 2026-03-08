@@ -47,6 +47,7 @@ export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
           if (status.status === "granted") {
             getLocation();
           } else {
+            Alert.alert(i18n.t("error"), i18n.t("errorGeolocationPermission"));
             setGeolocating(false);
           }
         });
@@ -83,7 +84,7 @@ export const DistrictPicker = ({ closeModal }: { closeModal?: () => void }) => {
           setNotFound(true);
         }
       })
-      .catch((error) => Alert.alert("Error", error.message))
+      .catch(() => Alert.alert(i18n.t("error"), i18n.t("errorGeolocation")))
       .finally(() => setGeolocating(false));
   };
 

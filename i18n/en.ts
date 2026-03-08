@@ -17,6 +17,8 @@ export const en = {
   error: `Error`,
   errorCalendarEvent: `Could not add event to calendar`,
   errorCalendarNoAccess: `Could not access calendar`,
+  errorGeolocation: `Could not determine your location. Please ensure location services are enabled and try again.`,
+  errorGeolocationPermission: `Location permission denied. Please enable location services and try again.`,
   find_district: `Find your district`,
   gso: `General Service Office`,
   gsoTab: `G.S.O.`,
