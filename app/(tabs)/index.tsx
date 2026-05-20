@@ -1,5 +1,4 @@
 import { EntityScreen } from "@/components/EntityScreen";
-
 import { useContent } from "@/hooks/useContent";
 
 export default function DistrictScreen() {
@@ -9,7 +8,7 @@ export default function DistrictScreen() {
     return null;
   }
 
-  const entity = entities[0];
+  const [district] = entities;
 
-  return <EntityScreen entity={entity} type="district" />;
+  return <EntityScreen entity={district} />;
 }

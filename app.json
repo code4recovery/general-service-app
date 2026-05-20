@@ -2,7 +2,7 @@
   "expo": {
     "name": "General Service",
     "slug": "general-service-app",
-    "version": "1.0.15",
+    "version": "1.0.17",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -15,7 +15,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "app.generalservice.www",
-      "buildNumber": "9",
+      "associatedDomains": ["applinks:generalservice.app"],
       "infoPlist": {
         "NSCalendarsUsageDescription": "General Service needs permission to add events to your calendar when requested.",
         "NSLocationWhenInUseUsageDescription": "General Service uses your location to find your district. Full privacy policy at https://generalservice.app/privacy",
@@ -33,8 +33,21 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#215488"
       },
-      "package": "app.generalservice",
-      "versionCode": 8
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "generalservice.app",
+              "pathPrefix": "/s"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ],
+      "package": "app.generalservice"
     },
     "web": {
       "bundler": "metro",

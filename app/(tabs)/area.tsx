@@ -1,5 +1,4 @@
 import { EntityScreen } from "@/components/EntityScreen";
-
 import { useContent } from "@/hooks/useContent";
 
 export default function AreaScreen() {
@@ -9,7 +8,7 @@ export default function AreaScreen() {
     return null;
   }
 
-  const entity = entities[1];
+  const [_district, area] = entities;
 
-  return <EntityScreen entity={entity} type="area" />;
+  return <EntityScreen entity={area} />;
 }

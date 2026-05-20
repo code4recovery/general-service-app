@@ -20,6 +20,19 @@ export type AddToCalendarButton = {
   timezone: string;
 };
 
+export type Story = {
+  id: number;
+  entity_id: number;
+  title: string;
+  description: string;
+  type: string;
+  reference: string;
+  language: string;
+  start_at: string;
+  end_at: string;
+  buttons: (LinkButton | AddToCalendarButton)[];
+};
+
 export type RawJsonEntity = {
   id: number;
   area: number | null;
@@ -29,35 +42,20 @@ export type RawJsonEntity = {
   banner_dark: string;
   website: string;
   language: string;
-  stories: {
-    id: number;
-    entity_id: number;
-    title: string;
-    description: string;
-    type: string;
-    reference: string;
-    language: string;
-    start_at: string;
-    end_at: string;
-    buttons: (LinkButton | AddToCalendarButton)[];
-  }[];
+  stories: Story[];
 };
 
 export type Entity = {
   id: number;
+  area: number;
+  district: string;
   name: string;
   banner: string;
   banner_dark: string;
   language: string;
   stories: {
     category: string;
-    items: {
-      id: number;
-      title: string;
-      description: string;
-      language: string;
-      buttons: (LinkButton | AddToCalendarButton)[];
-    }[];
+    items: Story[];
   }[];
 };
 

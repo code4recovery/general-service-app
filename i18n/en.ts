@@ -7,6 +7,7 @@ export const en = {
   aboutMeetings: `Looking for A.A. meetings?`,
   area: `Area {{number}}: {{name}}`,
   areaTab: `Area`,
+  back: `Back`,
   business: `Business`,
   changeDistrict: `Change District`,
   districtNumber: `District {{number}}`,

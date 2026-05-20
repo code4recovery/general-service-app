@@ -1,5 +1,4 @@
 import { EntityScreen } from "@/components/EntityScreen";
-
 import { useContent } from "@/hooks/useContent";
 
 export default function GsoScreen() {
@@ -9,7 +8,7 @@ export default function GsoScreen() {
     return null;
   }
 
-  const entity = entities[2];
+  const [_district, _area, gso] = entities;
 
-  return <EntityScreen entity={entity} type="gso" />;
+  return <EntityScreen entity={gso} />;
 }
