@@ -17,6 +17,11 @@ import { DistrictProvider } from "@/hooks/useDistrict";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
+export const unstable_settings = {
+  // Ensure the back button always points to 'index'
+  initialRouteName: "index",
+};
+
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
