@@ -8,9 +8,9 @@ import {
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
+import { useColorScheme } from "react-native";
 import "react-native-reanimated";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
 import { ContentProvider } from "@/hooks/useContent";
 import { DistrictProvider } from "@/hooks/useDistrict";
 
@@ -18,8 +18,8 @@ import { DistrictProvider } from "@/hooks/useDistrict";
 SplashScreen.preventAutoHideAsync();
 
 export const unstable_settings = {
-  // Ensure the back button always points to 'index'
-  initialRouteName: "index",
+  // Ensure the back button always points to '(tabs)'
+  initialRouteName: "(tabs)",
 };
 
 export default function RootLayout() {
