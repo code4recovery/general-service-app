@@ -1,6 +1,6 @@
 export const fr = {
   about: `À propos`,
-  aboutDescription: `Cette application est une ressource pour informer les serviteurs de confiance d'A.A. sur ce qui se passe dans leur district, leur région et au Bureau de service général.`,
+  aboutDescription: `Cette application est une ressource pour informer les serviteurs de confiance d'A.A. sur ce qui se passe dans leur district et région.`,
   aboutDownload: `Téléchargez l'application Meeting Guide`,
   aboutLogin: `Les responsables de région et de district doivent se connecter à generalservice.app pour mettre à jour les informations.`,
   aboutLoginButton: `Visitez {{site}}`,
@@ -21,8 +21,6 @@ export const fr = {
   errorGeolocation: `Impossible de déterminer votre emplacement. Veuillez vous assurer que les services de localisation sont activés et réessayer.`,
   errorGeolocationPermission: `Permission de localisation refusée. Veuillez activer les services de localisation et réessayer.`,
   find_district: `Trouvez votre district`,
-  gso: `Bureau de service général`,
-  gsoTab: `G.S.O.`,
   learnMore: `En savoir plus`,
   links: `Liens`,
   locating: `Localisation…`,

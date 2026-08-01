@@ -1,6 +1,6 @@
 export const es = {
   about: `Acerca de`,
-  aboutDescription: `Esta aplicación es un recurso para informar a los servidores de confianza en A.A. sobre lo que está sucediendo en su Distrito, Área y en la Oficina de Servicio General.`,
+  aboutDescription: `Esta aplicación es un recurso para informar a los servidores de confianza en A.A. sobre lo que está sucediendo en su Distrito y Área.`,
   aboutDownload: `Descarga la aplicación Meeting Guide`,
   aboutLogin: `Los oficiales de área y distrito deben iniciar sesión en generalservice.app para actualizar la información.`,
   aboutLoginButton: `Visita {{site}}`,
@@ -21,8 +21,6 @@ export const es = {
   errorGeolocation: `No se pudo determinar tu ubicación. Por favor, asegúrate de que los servicios de ubicación estén habilitados e inténtalo de nuevo.`,
   errorGeolocationPermission: `Permiso de ubicación denegado. Por favor, habilita los servicios de ubicación e inténtalo de nuevo.`,
   find_district: `Encuentra tu distrito`,
-  gso: `Oficina de Servicio General`,
-  gsoTab: `G.S.O.`,
   learnMore: `Aprende más`,
   links: `Enlaces`,
   locating: `Localizando...`,

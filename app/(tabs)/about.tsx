@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 
-import { Image, Platform, Pressable, StyleSheet, View } from "react-native";
-import Svg, { Path } from "react-native-svg";
 import * as Sharing from "expo-sharing";
+import { Platform, Pressable, StyleSheet, View } from "react-native";
+import Svg, { Path } from "react-native-svg";
 
-import { Collapsible } from "@/components/Collapsible";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { openLink } from "@/helpers/open-link";
 import { i18n } from "@/helpers/i18n";
+import { openLink } from "@/helpers/open-link";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function AboutScreen() {
@@ -62,27 +61,6 @@ export default function AboutScreen() {
           <ThemedText type="title">{i18n.t("about")}</ThemedText>
         </ThemedView>
 
-        <Collapsible title={i18n.t("aboutMeetings")}>
-          <Pressable
-            onPress={() => openLink("https://meetingguide.org/download")}
-          >
-            <ThemedView style={styles.downloadPanel}>
-              <Image
-                source={require("../../assets/images/meeting-guide.png")}
-                style={styles.downloadIcon}
-              />
-              <ThemedView style={styles.downloadText}>
-                <ThemedText>{i18n.t("aboutDownload")}</ThemedText>
-                <ThemedView style={styles.downloadButton}>
-                  <ThemedText style={styles.downloadButtonText}>
-                    {i18n.t("download")}
-                  </ThemedText>
-                </ThemedView>
-              </ThemedView>
-            </ThemedView>
-          </Pressable>
-        </Collapsible>
-
         <ThemedText>{i18n.t("aboutDescription")}</ThemedText>
         <ThemedText>{i18n.t("aboutLogin")}</ThemedText>
         <ThemedView style={styles.ctaButtons}>
@@ -99,7 +77,7 @@ export default function AboutScreen() {
             <Pressable
               onPress={() =>
                 Sharing.shareAsync("https://generalservice.app").catch((e) =>
-                  console.error(e)
+                  console.error(e),
                 )
               }
               style={styles.ctaButton}

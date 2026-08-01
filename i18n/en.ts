@@ -1,6 +1,6 @@
 export const en = {
   about: `About`,
-  aboutDescription: `This app is a resource to inform trusted servants in A.A. about what is happening in their District, Area, and at the General Service Office.`,
+  aboutDescription: `This app is a resource to inform trusted servants in A.A. about what is happening in their District and Area.`,
   aboutDownload: `Download the Meeting Guide app`,
   aboutLogin: `Area and district officers should log in to generalservice.app to update information.`,
   aboutLoginButton: `Visit {{site}}`,
@@ -21,8 +21,6 @@ export const en = {
   errorGeolocation: `Could not determine your location. Please ensure location services are enabled and try again.`,
   errorGeolocationPermission: `Location permission denied. Please enable location services and try again.`,
   find_district: `Find your district`,
-  gso: `General Service Office`,
-  gsoTab: `G.S.O.`,
   learnMore: `Learn More`,
   links: `Links`,
   locating: `Locating…`,

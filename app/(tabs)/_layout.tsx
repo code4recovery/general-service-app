@@ -1,7 +1,7 @@
+import * as NavigationBar from "expo-navigation-bar";
 import { Tabs } from "expo-router";
 import React, { useEffect } from "react";
 import { Platform } from "react-native";
-import * as NavigationBar from "expo-navigation-bar";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { TriangleIcon } from "@/components/navigation/TriangleIcon";
@@ -50,15 +50,6 @@ export default function TabLayout() {
           title: i18n.t("areaTab"),
           tabBarIcon: ({ focused }) => (
             <TriangleIcon focused={focused} type="area" />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="gso"
-        options={{
-          title: i18n.t("gsoTab"),
-          tabBarIcon: ({ focused }) => (
-            <TriangleIcon focused={focused} type="gso" />
           ),
         }}
       />
